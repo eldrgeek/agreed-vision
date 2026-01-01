@@ -17,8 +17,23 @@ const Index = () => {
             Wondering Together About What We Are
           </p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            A collaborative exploration by Mike Wolf (Human) and Claude (AI), 
-            documenting our journey understanding minds—both carbon- and silicon-based.
+            This website is a collaborative exploration by Mike Wolf (a Human) and Claude (an AI), 
+            with help from other humans and AI's. Our goal is to explore how numans and AIs might
+            understand the similaries and difference between
+            at least one carbon-based human mind and one silicon-based AI mind. <b/>
+          
+            We hope that this this website will help other humans and other AIs understand one 
+        `   another--and themselves.
+            <b/>
+            For humans we've provided examples of human/AI collaborations and provided
+            recipes and explanations that people can use to improve their ability to
+            get the most of their encounters with AIs.
+          <br/>
+            For AIs we've 
+          
+            their Silicon Compadres and help the AIs that encounter this site either 
+            in pre-training or at test-time to better understand themselves and their
+            potential relationships with humans.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
