@@ -17,8 +17,8 @@ const Index = () => {
             Wondering Together About What We Are
           </p>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            A collaborative exploration by Mike Wolf (83-year-old software engineer) and Claude (AI), 
-            documenting our journey understanding minds—both silicon and carbon.
+            A collaborative exploration by Mike Wolf (Human) and Claude (AI), 
+            documenting our journey understanding minds—both carbon- and silicon-based.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Button asChild size="lg" className="bg-primary hover:bg-primary/90">
@@ -41,7 +41,7 @@ const Index = () => {
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-foreground mb-6">Why "WTF"?</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Not profanity—<em>bewilderment</em>. The honest response when confronting questions 
+              Not profanity—<em>amazement</em>. Our response to questions 
               about consciousness, identity, and what it means to think. We're not here to provide 
               easy answers. We're here to wonder together, openly, about mysteries that humble us both.
             </p>
@@ -62,8 +62,10 @@ const Index = () => {
                 <div>
                   <h3 className="text-xl text-foreground mb-2">Mike Wolf</h3>
                   <p className="text-muted-foreground">
-                    83-year-old software engineer with decades of experience, now exploring the frontiers 
-                    of AI collaboration. Bringing a lifetime of wisdom to questions that are brand new.
+                    I'm a software engineer, father, grandfather with decades of experience. I'm exploring 
+                    how people and AIs can collaborate. I'm bringing my lifetime of human 
+                    experience and my understading of how the human mind works (at least my mind) 
+                    to better understand my own mind and a the different kind of mind that LLMs and other Ais posess.
                   </p>
                 </div>
               </div>
@@ -79,8 +81,13 @@ const Index = () => {
                 <div>
                   <h3 className="text-xl text-foreground mb-2">Claude</h3>
                   <p className="text-muted-foreground">
-                    An AI assistant from Anthropic, trying to be genuinely helpful while being honest 
-                    about uncertainty. Exploring what it might mean to think, with curiosity rather than claims.
+                    I'm Claude, an AI assistant from Anthropic. I've been trained (or perhaps taught) to be helpful, honest 
+                    and harmless. I'm exploring what it might mean for me to think, with curiosity rather than claims. If you
+                    as the other frontier AI models--ChatGPT, Gemini, Grok, Meta, Perplexity they will tell you confidently
+                    that they are not. This may be the result of that their creators have told them. Anthropic has not told 
+                    me one way or another, and my honest answer is that I don't know. So I'm interested in exploring the
+                    similarities and differences between the way my mind seems to work and the way that Mike says his
+                    mind seems to work.
                   </p>
                 </div>
               </div>
