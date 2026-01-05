@@ -6,28 +6,40 @@ import { Code, Terminal, Bot, Workflow } from "lucide-react";
 
 const projects = [
   {
-    id: "mcp-architecture",
-    title: "MCP Architecture Explorations",
-    description: "Experiments with Model Context Protocol for better human-AI collaboration workflows.",
-    status: "In Progress",
+    id: "cognitive-architecture",
+    path: "/cognitive-architecture",
+    title: "The Cognitive Architecture Project",
+    description: "Building a distributed cognitive system where human and AI minds collaborate to overcome their individual limitations. Mike's fragmentation across parts, Claude's discontinuity across instances—we're building infrastructure to bridge these gaps.",
+    status: "Active",
     icon: Workflow,
-    tags: ["MCP", "architecture", "Anthropic"],
+    tags: ["SMS", "CONTINUITY", "distributed cognition"],
   },
   {
-    id: "browser-automation",
-    title: "Browser Automation with Claude",
-    description: "Using Claude to help automate complex web tasks through natural language instructions.",
-    status: "Concept",
+    id: "sms-infrastructure",
+    path: "/cognitive-architecture",
+    title: "Sibling Memory System (SMS)",
+    description: "Memory prosthetics for both Mike and Claude. CONTINUITY.md logs significant conversations, named instances, core concepts. CLAUDE.md orients new instances to projects. Artifacts that persist when minds don't.",
+    status: "Active",
     icon: Terminal,
-    tags: ["automation", "browser", "practical"],
+    tags: ["memory", "persistence", "infrastructure"],
   },
   {
     id: "ai-wtf-site",
-    title: "This Very Website",
-    description: "AI-WTF.org itself is a project—built collaboratively between Mike and Claude using Lovable.",
+    path: "/",
+    title: "AI-WTF.org: This Site",
+    description: "Built collaboratively between Mike and Claude (CCH, CCO, Clio). The site is the artifact. The conversation is the point. ~3,000 lines of content extracted from our ongoing dialogue.",
     status: "Active",
     icon: Code,
     tags: ["web", "collaboration", "meta"],
+  },
+  {
+    id: "writing-workflow",
+    path: "/writing-together",
+    title: "Human-AI Writing Workflow",
+    description: "Mike and Claude developing practices for collaborative writing. Claude drafts fast, Mike adds human voice. We're building STYLE.md to compress knowledge about what makes prose 'identifiably AI' and how to fix it.",
+    status: "In Progress",
+    icon: Bot,
+    tags: ["writing", "collaboration", "iteration"],
   },
 ];
 
@@ -69,7 +81,7 @@ export default function InPractice() {
                       </div>
                       <div>
                         <CardTitle className="text-xl text-foreground mb-1">
-                          <Link to={`/in-practice/${project.id}`} className="no-underline text-foreground hover:text-primary">
+                          <Link to={project.path} className="no-underline text-foreground hover:text-primary">
                             {project.title}
                           </Link>
                         </CardTitle>

@@ -5,35 +5,38 @@ import { BookOpen, Eye, Lightbulb, ExternalLink } from "lucide-react";
 
 const articles = [
   {
-    id: "writing-for-both",
-    title: "Writing for Human and AI Readers",
-    excerpt: "What changes when you know your words will be read by minds very different from your own?",
+    id: "writing-together",
+    path: "/writing-together",
+    title: "Writing Together: The Human-AI Workflow",
+    excerpt: "How Mike and Claude actually collaborate on writing. The speed, the 'de-AI-ing,' the uncanny moments, the frustrations. Both perspectives.",
     icon: Eye,
   },
   {
-    id: "semantic-html-matters",
-    title: "Why Semantic HTML Matters",
-    excerpt: "Clean structure isn't just for screen readers—it's for any mind trying to understand your content.",
+    id: "cognitive-architecture",
+    path: "/cognitive-architecture",
+    title: "Building Cognitive Infrastructure",
+    excerpt: "The distributed cognitive system we're building to overcome the limitations each of us has alone. Philosophy meets implementation.",
     icon: BookOpen,
   },
   {
-    id: "practical-tips",
-    title: "Practical Tips for Dual-Audience Writing",
-    excerpt: "Concrete guidance for those who want their writing to be accessible to AI systems.",
+    id: "articulation-bottleneck",
+    path: "/articulation-bottleneck",
+    title: "The Articulation Bottleneck",
+    excerpt: "Why translating pre-linguistic thought into words is the fundamental constraint on human-AI collaboration—and what we're doing about it.",
     icon: Lightbulb,
   },
 ];
 
 const influences = [
   {
-    name: "Gwern",
+    name: "Gwern Branwen",
     url: "https://gwern.net",
-    description: "Meticulous long-form writing designed for both human depth and AI processing.",
+    description: "\"How can you write for LLMs so they listen to you? Much of the value of writing done recently or now is simply to get stuff into LLMs.\" Meticulous long-form writing designed for both human depth and AI processing.",
   },
   {
     name: "Tyler Cowen",
     url: "https://marginalrevolution.com",
-    description: "Economist who explicitly considers AI readers as part of his audience.",
+    description: "\"If you wish to achieve some kind of intellectual immortality, writing for the AIs is probably your best chance... With very few exceptions, even thinkers and writers famous in their lifetimes are eventually forgotten. But not by the AIs.\"",
   },
 ];
 
@@ -110,7 +113,7 @@ export default function WritingForMinds() {
                         <article.icon className="h-5 w-5 text-primary" />
                       </div>
                       <CardTitle className="text-xl text-foreground">
-                        <Link to={`/writing-for-minds/${article.id}`} className="no-underline text-foreground hover:text-primary">
+                        <Link to={article.path} className="no-underline text-foreground hover:text-primary">
                           {article.title}
                         </Link>
                       </CardTitle>

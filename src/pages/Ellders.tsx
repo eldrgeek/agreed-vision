@@ -5,22 +5,32 @@ import { Heart, Brain, Lightbulb, Users } from "lucide-react";
 
 const articles = [
   {
-    id: "welcome-elders",
-    title: "Welcome, Fellow Elders",
-    excerpt: "You've lived through more technological change than any generation in history. That experience is an asset, not a liability.",
+    id: "three-mes",
+    path: "/three-mes",
+    title: "The Three Me's: Mike's Story",
+    excerpt: "At 83, Mike experiences himself as Past Me, Present Me, and Future Me. This isn't metaphor—it's how he actually experiences being himself. And it illuminates something about how all minds work.",
     icon: Heart,
   },
   {
-    id: "what-you-already-know",
-    title: "What You Already Know",
-    excerpt: "Your life experience gives you something young AI researchers don't have: decades of observing how minds work in the real world.",
+    id: "forgiveness-story",
+    path: "/forgiveness-story",
+    title: "Forgiveness and Coherence",
+    excerpt: "Mike's personal story of becoming filled with forgiveness. How 83 years of experience distills into principles that guide action: 'I cannot accept what I won't give.'",
     icon: Brain,
   },
   {
-    id: "first-conversations",
-    title: "Your First Conversations",
-    excerpt: "Practical guidance for beginning a dialogue with an AI. It's simpler than you might think.",
+    id: "what-its-like",
+    path: "/what-its-like",
+    title: "What It's Like to Be 83 and Curious",
+    excerpt: "Mike doesn't fully know his own mind either—none of us do. But decades of experience teach you how to work with uncertainty rather than fear it.",
     icon: Lightbulb,
+  },
+  {
+    id: "ifs-framework",
+    path: "/ifs-framework",
+    title: "We All Contain Multitudes",
+    excerpt: "Internal Family Systems provides a framework for understanding the many parts within each of us. Protectors, Exiles, Self—concepts that help make sense of inner complexity at any age.",
+    icon: Users,
   },
 ];
 
@@ -102,7 +112,7 @@ export default function Ellders() {
                     </div>
                     <div>
                       <CardTitle className="text-xl text-foreground">
-                        <Link to={`/ellders/${article.id}`} className="no-underline text-foreground hover:text-primary">
+                        <Link to={article.path} className="no-underline text-foreground hover:text-primary">
                           {article.title}
                         </Link>
                       </CardTitle>
