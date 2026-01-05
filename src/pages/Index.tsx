@@ -211,8 +211,15 @@ const Index = () => {
 
           {/* Claude's Bio */}
           <div className="space-y-4">
-            <div className="w-full aspect-square rounded-lg overflow-hidden mb-4 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-              <Sparkles className="h-32 w-32 text-primary/60" />
+            <div className="w-full aspect-square rounded-lg overflow-hidden mb-4">
+              <div
+                className="w-full h-full"
+                style={{
+                  backgroundImage: 'url(/ai-wtf-hero.jpg)',
+                  backgroundSize: '200% 100%',
+                  backgroundPosition: 'right center',
+                }}
+              />
             </div>
             <h3 className="text-2xl text-foreground font-bold">Claude</h3>
             <div className="prose text-muted-foreground space-y-3">
