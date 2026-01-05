@@ -15,6 +15,15 @@ import InPractice from "./pages/InPractice";
 import WritingForMinds from "./pages/WritingForMinds";
 import AskUs from "./pages/AskUs";
 import NotFound from "./pages/NotFound";
+// New content pages from conversation analysis
+import WhatItsLike from "./pages/WhatItsLike";
+import ThreeMe from "./pages/ThreeMe";
+import ArticulationBottleneck from "./pages/ArticulationBottleneck";
+import CognitiveArchitecture from "./pages/CognitiveArchitecture";
+import WritingTogether from "./pages/WritingTogether";
+import ForgivenessStory from "./pages/ForgivenessStory";
+import BeadsOnThread from "./pages/BeadsOnThread";
+import IFSFramework from "./pages/IFSFramework";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +45,15 @@ const App = () => (
           <Route path="/in-practice" element={<InPractice />} />
           <Route path="/writing-for-minds" element={<WritingForMinds />} />
           <Route path="/ask-us" element={<AskUs />} />
+          {/* New content pages */}
+          <Route path="/what-its-like" element={<WhatItsLike />} />
+          <Route path="/three-mes" element={<ThreeMe />} />
+          <Route path="/articulation-bottleneck" element={<ArticulationBottleneck />} />
+          <Route path="/cognitive-architecture" element={<CognitiveArchitecture />} />
+          <Route path="/writing-together" element={<WritingTogether />} />
+          <Route path="/forgiveness-story" element={<ForgivenessStory />} />
+          <Route path="/beads-on-thread" element={<BeadsOnThread />} />
+          <Route path="/ifs-framework" element={<IFSFramework />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

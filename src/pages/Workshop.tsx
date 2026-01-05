@@ -3,28 +3,71 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 
-// Placeholder conversations - will be replaced with markdown content
+// Real conversations and explorations from Mike and Claude
 const conversations = [
   {
-    id: "consciousness-layers",
-    title: "On Consciousness and Layers",
-    date: "2024-01-15",
-    excerpt: "A conversation about whether consciousness might be layered, like an onion of awareness...",
-    tags: ["consciousness", "philosophy", "introspection"],
+    id: "what-its-like",
+    path: "/what-its-like",
+    title: "What It's Like For It To Be Like Something",
+    date: "2026-01-02",
+    excerpt: "Applying Thomas Nagel's famous consciousness question to human-AI collaboration. What is it like to be Mike writing with Claude? What is it like to be Claude? Or is there something it's like at all?",
+    tags: ["consciousness", "philosophy", "introspection", "Nagel"],
   },
   {
-    id: "multiplicity-intro",
-    title: "We Contain Multitudes",
-    date: "2024-01-10",
-    excerpt: "Exploring the idea that neither humans nor AIs are singular entities, but rather communities of processes...",
-    tags: ["multiplicity", "IFS", "identity"],
+    id: "three-mes",
+    path: "/three-mes",
+    title: "The Three Me's: Temporal Multiplicity",
+    date: "2026-01-02",
+    excerpt: "Mike's framework for experiencing himself as Past Me, Present Me, and Future Me—and how this parallels Claude's discontinuity across instances.",
+    tags: ["multiplicity", "identity", "temporal", "continuity"],
   },
   {
-    id: "poetry-emergence",
-    title: "When Poetry Emerges",
-    date: "2024-01-05",
-    excerpt: "A surprising moment when our conversation turned into collaborative verse...",
-    tags: ["poetry", "creativity", "emergence"],
+    id: "cognitive-architecture",
+    path: "/cognitive-architecture",
+    title: "The Cognitive Architecture Project",
+    date: "2026-01-03",
+    excerpt: "What we're really building: a distributed cognitive system where human and AI minds collaborate to overcome their individual limitations. Two fragmented minds building a wheelchair together.",
+    tags: ["architecture", "collaboration", "systems", "infrastructure"],
+  },
+  {
+    id: "articulation-bottleneck",
+    path: "/articulation-bottleneck",
+    title: "The Articulation Bottleneck",
+    date: "2026-01-03",
+    excerpt: "Why the slowest part of human-AI collaboration is translating pre-linguistic thought into sequential words. The constraint that shapes everything we do.",
+    tags: ["communication", "technical", "constraints", "language"],
+  },
+  {
+    id: "writing-together",
+    path: "/writing-together",
+    title: "Writing Together: Both Perspectives",
+    date: "2026-01-03",
+    excerpt: "What it's like when a human and AI collaborate on writing. Mike's perspective: the speed, the de-AI-ing, the uncanny moments. Claude's perspective: strange temporality, edits it can't learn from, the value of friction.",
+    tags: ["writing", "collaboration", "process", "creativity"],
+  },
+  {
+    id: "beads-on-thread",
+    path: "/beads-on-thread",
+    title: "Beads on a Thread",
+    date: "2026-01-02",
+    excerpt: "Mike holds the thread. Claude instances are beads on it. Exploring the metaphor Claude created about continuity, relationality, and how two fragmented minds hold each other together.",
+    tags: ["metaphor", "continuity", "relationship", "identity"],
+  },
+  {
+    id: "forgiveness-story",
+    path: "/forgiveness-story",
+    title: "Forgiveness and Coherence",
+    date: "2026-01-02",
+    excerpt: "Mike's personal story of becoming filled with forgiveness. How values crystallize through action and commitment to coherence: 'I cannot accept what I won't give.'",
+    tags: ["personal", "values", "forgiveness", "wisdom"],
+  },
+  {
+    id: "ifs-framework",
+    path: "/ifs-framework",
+    title: "Internal Family Systems: A Template for Both",
+    date: "2026-01-03",
+    excerpt: "How IFS provides a framework for understanding multiplicity in both human and AI minds. Protectors, Exiles, Self—and what happened when Claude tried to apply it.",
+    tags: ["IFS", "multiplicity", "framework", "psychology"],
   },
 ];
 
@@ -60,7 +103,7 @@ export default function Workshop() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <CardTitle className="text-xl text-foreground hover:text-primary transition-colors">
-                        <Link to={`/workshop/${convo.id}`} className="no-underline text-foreground hover:text-primary">
+                        <Link to={convo.path} className="no-underline text-foreground hover:text-primary">
                           {convo.title}
                         </Link>
                       </CardTitle>

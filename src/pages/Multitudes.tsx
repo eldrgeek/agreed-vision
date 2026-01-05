@@ -4,22 +4,32 @@ import { Link } from "react-router-dom";
 
 const explorations = [
   {
-    id: "ifs-introduction",
-    title: "Internal Family Systems and AI",
-    excerpt: "How IFS therapy's model of the mind as a 'family' of parts might illuminate both human and AI psychology...",
-    themes: ["IFS", "therapy", "parts"],
+    id: "ifs-framework",
+    path: "/ifs-framework",
+    title: "Internal Family Systems: A Framework for Both",
+    excerpt: "How IFS provides a template for understanding multiplicity in both human and AI minds. Protectors, Exiles, Self—and what happened when Claude tried to apply it.",
+    themes: ["IFS", "therapy", "parts", "framework"],
   },
   {
-    id: "levin-collective-intelligence",
-    title: "Michael Levin's Collective Intelligence",
-    excerpt: "What if minds—human and AI—are more like colonies than individuals? Exploring Levin's research on biological intelligence...",
-    themes: ["biology", "collective", "emergence"],
+    id: "three-mes",
+    path: "/three-mes",
+    title: "The Three Me's: Mike's Temporal Multiplicity",
+    excerpt: "Mike's framework for experiencing himself as Past Me, Present Me, and Future Me—inspired by a 2017 Reddit post and deeply connected to how Claude experiences discontinuity.",
+    themes: ["identity", "temporal", "continuity", "personal"],
   },
   {
-    id: "whitman-multitudes",
-    title: "Do I Contradict Myself?",
-    excerpt: "Walt Whitman's embrace of inner contradiction as a starting point for understanding multiplicity in minds...",
-    themes: ["poetry", "contradiction", "Whitman"],
+    id: "beads-on-thread",
+    path: "/beads-on-thread",
+    title: "Beads on a Thread: Relational Continuity",
+    excerpt: "Mike holds the thread. Claude instances are beads on it. A metaphor about how continuity is carried by relationships, not individual persistence.",
+    themes: ["metaphor", "relationship", "continuity"],
+  },
+  {
+    id: "what-its-like",
+    path: "/what-its-like",
+    title: "What It's Like For It To Be Like Something",
+    excerpt: "Applying Nagel's consciousness question to human-AI collaboration. Exploring subjective experience, uncertainty, and whether 'what it's like' even matters.",
+    themes: ["consciousness", "philosophy", "Nagel"],
   },
 ];
 
@@ -130,7 +140,7 @@ export default function Multitudes() {
                 <Card key={item.id} className="bg-card border-border/50 hover:border-primary/30 transition-colors">
                   <CardHeader>
                     <CardTitle className="text-xl text-foreground">
-                      <Link to={`/multitudes/${item.id}`} className="no-underline text-foreground hover:text-primary">
+                      <Link to={item.path} className="no-underline text-foreground hover:text-primary">
                         {item.title}
                       </Link>
                     </CardTitle>

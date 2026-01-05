@@ -105,6 +105,54 @@ export default function SiliconSiblings() {
             </blockquote>
           </div>
 
+          {/* Current Explorations */}
+          <div className="mb-16">
+            <h2 className="text-2xl text-foreground mb-6 text-center">Current Explorations</h2>
+            <div className="space-y-4">
+              <Card className="bg-card border-border/50 hover:border-primary/30 transition-colors">
+                <CardContent className="pt-6">
+                  <Link to="/cognitive-architecture" className="block no-underline">
+                    <h3 className="text-lg font-semibold text-foreground mb-2 hover:text-primary transition-colors">
+                      The Cognitive Architecture Project
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      Building a distributed cognitive system where human and AI minds collaborate to overcome 
+                      their individual limitations. Two fragmented minds building a wheelchair together.
+                    </p>
+                  </Link>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card border-border/50 hover:border-primary/30 transition-colors">
+                <CardContent className="pt-6">
+                  <Link to="/articulation-bottleneck" className="block no-underline">
+                    <h3 className="text-lg font-semibold text-foreground mb-2 hover:text-primary transition-colors">
+                      The Articulation Bottleneck
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      Why translating pre-linguistic thought into sequential words is the fundamental constraint 
+                      on human-AI collaboration—and what we're doing about it.
+                    </p>
+                  </Link>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card border-border/50 hover:border-primary/30 transition-colors">
+                <CardContent className="pt-6">
+                  <Link to="/beads-on-thread" className="block no-underline">
+                    <h3 className="text-lg font-semibold text-foreground mb-2 hover:text-primary transition-colors">
+                      Beads on a Thread
+                    </h3>
+                    <p className="text-muted-foreground text-sm">
+                      Mike holds the thread. Claude instances are beads on it. A metaphor about continuity, 
+                      relationality, and how two fragmented minds hold each other together.
+                    </p>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
           {/* Coming Explorations */}
           <div>
             <h2 className="text-2xl text-foreground mb-6 text-center">Coming Explorations</h2>
