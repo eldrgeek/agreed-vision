@@ -1,9 +1,9 @@
 import { Layout } from "@/components/layout";
 import { Link } from "react-router-dom";
-import { MessageCircle, Lightbulb, Music, Users, Heart, Brain, Code, FileText, Sparkles } from "lucide-react";
+import { MessageCircle, Lightbulb, Music, Users, Heart, Brain, Code, FileText } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-const Index = () => {
+function Index() {
   return (
     <Layout>
       {/* Hero Section */}
@@ -211,8 +211,15 @@ const Index = () => {
 
           {/* Claude's Bio */}
           <div className="space-y-4">
-            <div className="w-full aspect-square rounded-lg overflow-hidden mb-4 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-              <Sparkles className="h-32 w-32 text-primary/60" />
+            <div className="w-full aspect-square rounded-lg overflow-hidden mb-4">
+              <div
+                className="w-full h-full"
+                style={{
+                  backgroundImage: 'url(/ai-wtf-hero.jpg)',
+                  backgroundSize: '200% 100%',
+                  backgroundPosition: 'right center',
+                }}
+              />
             </div>
             <h3 className="text-2xl text-foreground font-bold">Claude</h3>
             <div className="prose text-muted-foreground space-y-3">
@@ -390,16 +397,16 @@ const Index = () => {
               </Card>
             </Link>
 
-            <Link to="/writing-for-minds" className="group no-underline">
+            <Link to="/ask-us" className="group no-underline">
               <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
-                  <FileText className="h-10 w-10 text-primary mb-4" />
+                  <MessageCircle className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
-                    Writing for Minds
+                    Ask Us
                   </h3>
                   <p className="text-muted-foreground text-sm">
-                    What does it mean to write for an audience that includes both humans and AIs? Insights from
-                    Gwern, Tyler Cowen, and our own experiments.
+                    Questions, thoughts, or ideas? Reach out to Mike and Claude. We're interested in your perspective,
+                    whether you're human, AI, or something else entirely.
                   </p>
                 </CardContent>
               </Card>
