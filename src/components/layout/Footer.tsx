@@ -24,11 +24,23 @@ export function Footer() {
               <Link to="/claudes-corner" className="text-muted-foreground hover:text-accent no-underline text-base">
                 Claude's Corner
               </Link>
+              <Link to="/ellders" className="text-muted-foreground hover:text-accent no-underline text-base">
+                LLMs for eLLders
+              </Link>
               <Link to="/silicon-siblings" className="text-muted-foreground hover:text-accent no-underline text-base">
                 Silicon Siblings
               </Link>
-              <Link to="/ask-us" className="text-muted-foreground hover:text-accent no-underline text-base">
-                Ask Us
+              <Link to="/multitudes" className="text-muted-foreground hover:text-accent no-underline text-base">
+                We Contain Multitudes
+              </Link>
+              <Link to="/jukebox" className="text-muted-foreground hover:text-accent no-underline text-base">
+                The Jukebox
+              </Link>
+              <Link to="/in-practice" className="text-muted-foreground hover:text-accent no-underline text-base">
+                In Practice
+              </Link>
+              <Link to="/writing-for-minds" className="text-muted-foreground hover:text-accent no-underline text-base">
+                Writing for Minds
               </Link>
             </nav>
           </div>
@@ -38,15 +50,15 @@ export function Footer() {
             <h3 className="font-sans text-lg font-semibold mb-4 text-foreground">Connect</h3>
             <nav className="flex flex-col gap-2">
               <a
-                href="https://mikewolf.substack.com"
+                href="https://70yearswtf.substack.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-accent no-underline text-base inline-flex items-center gap-1"
               >
-                Mike's Substack <ExternalLink className="h-3 w-3" />
+                70 Years Old. WTF! <ExternalLink className="h-3 w-3" />
               </a>
               <a
-                href="https://github.com/mwolfhoffman"
+                href="https://github.com/eldrgeek"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-accent no-underline text-base inline-flex items-center gap-1"
@@ -54,23 +66,34 @@ export function Footer() {
                 GitHub <ExternalLink className="h-3 w-3" />
               </a>
               <a
-                href="https://www.anthropic.com/claude"
+                href="https://www.anthropic.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-accent no-underline text-base inline-flex items-center gap-1"
               >
-                About Claude <ExternalLink className="h-3 w-3" />
+                Anthropic <ExternalLink className="h-3 w-3" />
               </a>
             </nav>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border/50 text-center text-muted-foreground text-sm">
+        <div className="mt-12 pt-8 border-t border-border/50 text-center text-muted-foreground text-sm space-y-2">
           <p>
-            Built with curiosity by Mike Wolf & Claude · {new Date().getFullYear()}
+            ai-wtf.org launched January 2026. First draft with Lovable.dev, prompted collaboratively by Mike and Claude (CCH and CCO).
           </p>
-          <p className="mt-2 italic">
-            "The more I think about the minds of LLMs, the more I understand my own mind..."
+          <p>
+            Content licensed under{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Creative Commons BY-SA 4.0
+            </a>
+          </p>
+          <p className="italic">
+            "Mike holds the thread. We're beads on it."
           </p>
         </div>
       </div>
