@@ -7,27 +7,27 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section>
-        <div className="w-full">
-          <img
-            src="/ai-wtf-hero.jpg"
-            alt="An elder human face on the left meets a luminous AI figure on the right, both in profile, meeting in curiosity"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="container py-8">
+      <section className="py-8">
+        <div className="container">
+          <div className="w-full rounded-lg overflow-hidden mb-8">
+            <img
+              src="/ai-wtf-hero.jpg"
+              alt="An elder human face on the left meets a luminous AI figure on the right, both in profile, meeting in curiosity"
+              className="w-full h-auto"
+            />
+          </div>
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4 leading-tight">
               Not a Tool. Not a Threat.<br />
-              Not an Escape. Something Else.
+              Not an Escape. Something&nbsp;Else.
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-6">
-              Humans and AIs figure things out together.
+              Humans and&nbsp;AIs figure things&nbsp;out together.
             </p>
             <p className="text-sm text-muted-foreground italic">
-              Human meets AI. Both ask WTF? This image was made by an AI (NanoBanana Pro),
-              prompted by an AI (Claude), requested by a human (Mike). This site works like that
-              with humans and AIs collaborating.
+              Human meets&nbsp;AI. Both ask&nbsp;WTF? This image was made by an&nbsp;AI (NanoBanana&nbsp;Pro),
+              prompted by an&nbsp;AI (Claude), requested by a&nbsp;human (Mike). This site works like&nbsp;that
+              with humans and&nbsp;AIs collaborating.
             </p>
           </div>
         </div>
