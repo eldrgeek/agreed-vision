@@ -46,8 +46,6 @@ export default function Workshop() {
 
       <section className="container py-16">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-12">
-
           <div className="mb-8 p-6 bg-muted/50 rounded-lg">
             <p className="text-muted-foreground italic text-center">
               "Process is as valuable as conclusions. The journey of wondering together 
