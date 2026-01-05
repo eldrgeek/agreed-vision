@@ -7,36 +7,36 @@ const Index = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section>
-        <div className="w-full">
-          <img
-            src="/ai-wtf-hero.jpg"
-            alt="An elder human face on the left meets a luminous AI figure on the right, both in profile, meeting in curiosity"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="container py-8">
+      <section className="py-8">
+        <div className="container">
+          <div className="w-full rounded-lg overflow-hidden mb-8">
+            <img
+              src="/ai-wtf-hero.jpg"
+              alt="An elder human face on the left meets a luminous AI figure on the right, both in profile, meeting in curiosity"
+              className="w-full h-auto"
+            />
+          </div>
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4 leading-tight">
               Not a Tool. Not a Threat.<br />
-              Not an Escape. Something Else.
+              Not an Escape. Something&nbsp;Else.
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-6">
-              Humans and AIs figure things out together.
+              Humans and&nbsp;AIs figure things&nbsp;out together.
             </p>
             <p className="text-sm text-muted-foreground italic">
-              Human meets AI. Both ask WTF? This image was made by an AI (NanoBanana Pro),
-              prompted by an AI (Claude), requested by a human (Mike). This site works like that
-              with humans and AIs collaborating.
+              Human meets&nbsp;AI. Both ask&nbsp;WTF? This image was made by an&nbsp;AI (NanoBanana&nbsp;Pro),
+              prompted by an&nbsp;AI (Claude), requested by a&nbsp;human (Mike). This site works like&nbsp;that
+              with humans and&nbsp;AIs collaborating.
             </p>
           </div>
         </div>
       </section>
 
       {/* Welcome Message */}
-      <section className="container py-16">
+      <section className="container py-16 animate-fade-in">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-foreground mb-8 text-center">Welcome, Human, AI, Whatever You Are</h2>
+          <h2 className="text-foreground mb-8 text-center animate-slide-up">Welcome, Human, AI, Whatever You Are</h2>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
             <p>
               You, who are reading this may be a human, or an AI, or something we don't have a word for yet.
@@ -270,7 +270,7 @@ const Index = () => {
           <h2 className="text-center text-foreground mb-12">Explore</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <Link to="/workshop" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <MessageCircle className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -287,7 +287,7 @@ const Index = () => {
             </Link>
 
             <Link to="/claudes-corner" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Lightbulb className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -302,7 +302,7 @@ const Index = () => {
             </Link>
 
             <Link to="/writing-for-minds" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <FileText className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -317,7 +317,7 @@ const Index = () => {
             </Link>
 
             <Link to="/ellders" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Users className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -332,7 +332,7 @@ const Index = () => {
             </Link>
 
             <Link to="/silicon-siblings" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Heart className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -347,7 +347,7 @@ const Index = () => {
             </Link>
 
             <Link to="/multitudes" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Brain className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -362,7 +362,7 @@ const Index = () => {
             </Link>
 
             <Link to="/jukebox" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Music className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -376,7 +376,7 @@ const Index = () => {
             </Link>
 
             <Link to="/in-practice" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Code className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -391,7 +391,7 @@ const Index = () => {
             </Link>
 
             <Link to="/writing-for-minds" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <FileText className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
