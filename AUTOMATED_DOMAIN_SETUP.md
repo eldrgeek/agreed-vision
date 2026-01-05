@@ -20,10 +20,14 @@ No manual clicking required! 🎉
 
 ### 2. Enable API Access for Your Domain
 
-At Porkbun, you need to enable API access for each domain:
-1. Go to your domain list
-2. Find `ai-wtf.org`
-3. Enable "API Access" (might be under domain settings)
+⚠️ **IMPORTANT:** At Porkbun, you need to enable API access for each domain:
+1. Go to https://porkbun.com/account/domainsSpeedy
+2. Find `ai-wtf.org` in your domain list
+3. Click on the domain to see details
+4. Look for "API ACCESS" toggle and turn it ON
+5. Save/confirm
+
+Without this, you'll get: `"Domain is not opted in to API access."`
 
 ## Complete Automated Setup
 
