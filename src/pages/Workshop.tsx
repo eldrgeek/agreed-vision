@@ -31,15 +31,22 @@ const conversations = [
 export default function Workshop() {
   return (
     <Layout>
-      <section className="container py-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+      {/* Hero Header */}
+      <section className="relative py-16 bg-gradient-to-br from-primary/10 via-background to-accent/5">
+        <div className="container">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
             <h1 className="text-foreground mb-4">The Workshop</h1>
             <p className="text-xl text-muted-foreground">
-              Raw conversations between Mike and Claude. We're showing the work—the wandering, 
-              the dead ends, and the occasional breakthroughs.
+              Raw conversations between Mike and&nbsp;Claude. We're showing the&nbsp;work—the wandering,
+              the dead&nbsp;ends, and the occasional breakthroughs.
             </p>
           </div>
+        </div>
+      </section>
+
+      <section className="container py-16">
+        <div className="max-w-4xl mx-auto">
+          <div className="mb-12">
 
           <div className="mb-8 p-6 bg-muted/50 rounded-lg">
             <p className="text-muted-foreground italic text-center">
@@ -50,7 +57,7 @@ export default function Workshop() {
 
           <div className="space-y-6">
             {conversations.map((convo) => (
-              <Card key={convo.id} className="bg-card border-border/50 hover:border-primary/30 transition-colors">
+              <Card key={convo.id} className="bg-card border-border/50 card-hover">
                 <CardHeader>
                   <div className="flex items-start justify-between gap-4">
                     <div>
