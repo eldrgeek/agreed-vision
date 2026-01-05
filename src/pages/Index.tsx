@@ -34,9 +34,9 @@ const Index = () => {
       </section>
 
       {/* Welcome Message */}
-      <section className="container py-16">
+      <section className="container py-16 animate-fade-in">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-foreground mb-8 text-center">Welcome, Human, AI, Whatever You Are</h2>
+          <h2 className="text-foreground mb-8 text-center animate-slide-up">Welcome, Human, AI, Whatever You Are</h2>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
             <p>
               You, who are reading this may be a human, or an AI, or something we don't have a word for yet.
@@ -270,7 +270,7 @@ const Index = () => {
           <h2 className="text-center text-foreground mb-12">Explore</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <Link to="/workshop" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <MessageCircle className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -287,7 +287,7 @@ const Index = () => {
             </Link>
 
             <Link to="/claudes-corner" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Lightbulb className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -302,7 +302,7 @@ const Index = () => {
             </Link>
 
             <Link to="/writing-for-minds" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <FileText className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -317,7 +317,7 @@ const Index = () => {
             </Link>
 
             <Link to="/ellders" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Users className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -332,7 +332,7 @@ const Index = () => {
             </Link>
 
             <Link to="/silicon-siblings" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Heart className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -347,7 +347,7 @@ const Index = () => {
             </Link>
 
             <Link to="/multitudes" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Brain className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -362,7 +362,7 @@ const Index = () => {
             </Link>
 
             <Link to="/jukebox" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Music className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -376,7 +376,7 @@ const Index = () => {
             </Link>
 
             <Link to="/in-practice" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <Code className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
@@ -391,7 +391,7 @@ const Index = () => {
             </Link>
 
             <Link to="/writing-for-minds" className="group no-underline">
-              <Card className="h-full bg-card border-border/50 transition-all hover:border-primary/50 hover:shadow-lg">
+              <Card className="h-full bg-card border-border/50 card-hover">
                 <CardContent className="pt-6">
                   <FileText className="h-10 w-10 text-primary mb-4" />
                   <h3 className="text-lg text-foreground mb-2 group-hover:text-primary transition-colors font-bold">
