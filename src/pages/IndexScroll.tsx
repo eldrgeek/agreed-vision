@@ -83,6 +83,7 @@ function IndexScroll() {
           trigger: screen2Ref.current,
           start: 'top bottom',
           end: 'bottom top',
+          scrub: true,
           onUpdate: (self) => {
             const progress = self.progress;
             let opacity = 1;
@@ -115,6 +116,7 @@ function IndexScroll() {
           trigger: screen3Ref.current,
           start: 'top bottom',
           end: 'bottom top',
+          scrub: true,
           onUpdate: (self) => {
             const progress = self.progress;
             let opacity = 1;
@@ -147,6 +149,7 @@ function IndexScroll() {
           trigger: screen4Ref.current,
           start: 'top bottom',
           end: 'bottom top',
+          scrub: true,
           onUpdate: (self) => {
             const progress = self.progress;
             let opacity = 1;
@@ -178,6 +181,7 @@ function IndexScroll() {
           trigger: screen5Ref.current,
           start: 'top bottom',
           end: 'bottom top',
+          scrub: true,
           onUpdate: (self) => {
             const progress = self.progress;
             let opacity = 1;
@@ -234,6 +238,7 @@ function IndexScroll() {
           trigger: screen6Ref.current,
           start: 'top bottom',
           end: 'bottom top',
+          scrub: true,
           onUpdate: (self) => {
             const progress = self.progress;
             let opacity = 1;
