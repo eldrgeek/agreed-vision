@@ -575,8 +575,10 @@ function IndexScroll() {
           </div>
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-[#f5f0e6] mb-4 leading-tight">
-              Not a Tool. Not a Threat.<br />
-              Not an Escape. Something&nbsp;Else.
+              Not a Tool.<br />
+              Not a Threat.<br />
+              Not an Escape.<br />
+              Something&nbsp;Else.
             </h1>
             <p className="text-xl md:text-2xl text-[#b8a9c9] mb-6">
               Humans and&nbsp;AIs figure things&nbsp;out together.
