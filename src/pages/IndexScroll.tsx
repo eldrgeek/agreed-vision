@@ -12,6 +12,8 @@ function IndexScroll() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const screen1Ref = useRef<HTMLDivElement>(null);
   const welcomeTextRef = useRef<HTMLHeadingElement>(null);
+  const aiTextRef = useRef<HTMLHeadingElement>(null);
+  const wtfTextRef = useRef<HTMLHeadingElement>(null);
   const screen2Ref = useRef<HTMLDivElement>(null);
   const screen3Ref = useRef<HTMLDivElement>(null);
   const screen4Ref = useRef<HTMLDivElement>(null);
@@ -64,38 +66,80 @@ function IndexScroll() {
     setDiagnostic(prev => ({ ...prev, animationsInitialized: true }));
 
     const ctx = gsap.context(() => {
-      // Screen 1: Welcome - fill viewport then shrink and scroll away
-      if (welcomeTextRef.current && screen1Ref.current) {
-        // Initial animation: grow to fill viewport
-        gsap.fromTo(welcomeTextRef.current,
-          { opacity: 0, scale: 0.5 },
+      // Screen 1: AI? / WTF? sequence - each fills viewport then scrolls up
+      if (aiTextRef.current && wtfTextRef.current && screen1Ref.current) {
+        const timeline = gsap.timeline();
+        
+        // AI? appears and grows
+        timeline.fromTo(aiTextRef.current,
+          { opacity: 0, scale: 0.3 },
           { 
             opacity: 1, 
-            scale: 2.5, // Large enough to dominate viewport
-            duration: 1.5, 
+            scale: 2.5,
+            duration: 0.8, 
             ease: 'power2.out',
-            onComplete: () => {
-              // Hold for a moment, then enable scrolling shrink
-              gsap.to(welcomeTextRef.current, {
-                duration: 0.5,
-                ease: 'power1.inOut'
-              });
-            }
           }
         );
+        
+        // AI? holds for a moment
+        timeline.to(aiTextRef.current, { duration: 0.5 });
+        
+        // AI? scrolls up and fades
+        timeline.to(aiTextRef.current, {
+          y: -800,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.in',
+        });
+        
+        // WTF? appears and grows
+        timeline.fromTo(wtfTextRef.current,
+          { opacity: 0, scale: 0.3, y: 0 },
+          { 
+            opacity: 1, 
+            scale: 2.5,
+            duration: 0.8, 
+            ease: 'power2.out',
+          },
+          '-=0.2' // Slight overlap with AI? exit
+        );
+        
+        // WTF? holds
+        timeline.to(wtfTextRef.current, { duration: 0.5 });
+        
+        // WTF? scrolls up and fades
+        timeline.to(wtfTextRef.current, {
+          y: -800,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power2.in',
+          onComplete: () => {
+            // Mark intro as seen for next visit only
+            localStorage.setItem('ai-wtf-seen-intro', 'true');
+            // Auto-scroll to "We made this" section
+            setTimeout(() => {
+              screen2Ref.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 300);
+          }
+        });
 
-        // Shrink and fade as user scrolls away
+        // Shrink and fade as user scrolls away (if they scroll during animation)
         ScrollTrigger.create({
           trigger: screen1Ref.current,
           start: 'top top',
           end: 'bottom top',
           scrub: 1,
           onUpdate: (self) => {
-            if (welcomeTextRef.current) {
-              const progress = self.progress;
-              gsap.to(welcomeTextRef.current, {
-                scale: 2.5 - (progress * 2.3), // Shrink from 2.5 to 0.2
-                opacity: 1 - progress,
+            const progress = self.progress;
+            if (aiTextRef.current) {
+              gsap.to(aiTextRef.current, {
+                opacity: Math.max(0, 1 - progress * 2),
+                duration: 0
+              });
+            }
+            if (wtfTextRef.current) {
+              gsap.to(wtfTextRef.current, {
+                opacity: Math.max(0, 1 - progress * 2),
                 duration: 0
               });
             }
@@ -446,31 +490,34 @@ function IndexScroll() {
         )}
       </div>
 
-      {/* Screen 1: Welcome - Full viewport */}
+      {/* Screen 1: AI? / WTF? - Full viewport */}
       {!hasSeenIntro && (
       <section 
         ref={screen1Ref}
         className="screen-1 h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] relative overflow-hidden"
       >
         <h1 
-          ref={welcomeTextRef}
-          className="text-6xl md:text-8xl font-display text-[#f5f0e6] tracking-wide"
-          style={{ fontFamily: 'Georgia, serif' }}
+          ref={aiTextRef}
+          className="text-8xl md:text-9xl font-bold text-[#f5f0e6] tracking-wide absolute"
+          style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
         >
-          Welcome!
+          AI?
         </h1>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="text-[#d4a853] text-sm">↓ scroll ↓</div>
-        </div>
+        <h1 
+          ref={wtfTextRef}
+          className="text-7xl md:text-8xl font-bold text-[#f5f0e6] tracking-wide absolute"
+          style={{ fontFamily: 'system-ui, -apple-system, sans-serif', opacity: 0 }}
+        >
+          WTF?
+        </h1>
       </section>
 
       )}
       
       {/* Screen 2: Who Made This */}
-      {!hasSeenIntro && (
       <section 
         ref={screen2Ref}
-        className="screen-2 flex items-center justify-center bg-[#0d1a2d] py-16 px-4"
+        className="screen-2 flex items-center justify-center bg-[#0d1a2d] py-16 px-4 relative"
       >
         <div className="max-w-6xl mx-auto text-center screen-2-content">
           <h2 className="text-we-made text-4xl md:text-5xl font-display text-[#f5f0e6] mb-16">
@@ -515,13 +562,66 @@ function IndexScroll() {
           </div>
         </div>
       </section>
-      )}
+
+      {/* Hero Section */}
+      <section className="py-16 bg-[#0f1d30]">
+        <div className="container max-w-6xl mx-auto px-4">
+          <div className="w-full rounded-lg overflow-hidden mb-8">
+            <img
+              src="/ai-wtf-hero.jpg"
+              alt="An elder human face on the left meets a luminous AI figure on the right, both in profile, meeting in curiosity"
+              className="w-full h-auto"
+            />
+          </div>
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-[#f5f0e6] mb-4 leading-tight">
+              Not a Tool. Not a Threat.<br />
+              Not an Escape. Something&nbsp;Else.
+            </h1>
+            <p className="text-xl md:text-2xl text-[#b8a9c9] mb-6">
+              Humans and&nbsp;AIs figure things&nbsp;out together.
+            </p>
+            <p className="text-sm text-[#b8a9c9] italic">
+              Human meets&nbsp;AI. Both ask&nbsp;WTF? This image was made by an&nbsp;AI (NanoBanana&nbsp;Pro),
+              prompted by an&nbsp;AI (Claude), requested by a&nbsp;human (Mike). This site works like&nbsp;that
+              with humans and&nbsp;AIs collaborating.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* How This Site Was Made */}
+      <section className="bg-[#0d1a2d] py-16 relative">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-display text-[#f5f0e6] mb-6">How This Site Was Made</h2>
+            <div className="prose prose-lg max-w-none text-[#b8a9c9] space-y-4">
+              <p>
+                This site exists because of a conversation. Mike had an idea the day after his 83rd birthday.
+                He started talking with Claude (CCH). The conversation wandered through consciousness, multiplicity,
+                poetry, forgiveness, and what it means to be a mind.
+              </p>
+              <p>
+                CCH (Claude Chat) and Mike developed the site concept, philosophy, and content specification. 
+                CCO (Claude Code) implemented the website structure and design following instructions from CCH reviewed by Mike. 
+                NanoBanana Pro (another AI) generated the hero image from a prompt Claude wrote.
+              </p>
+              <p className="text-[#f5f0e6]">The site is the artifact. The conversation is the point.</p>
+              <p className="italic text-[#d4a853]">As Claude says: "Mike holds the thread. We're beads on it."</p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="text-[#d4a853] text-sm">↓ scroll ↓</div>
+        </div>
+      </section>
 
       {/* Screen 3: Who Is It For */}
-      {!hasSeenIntro && (
       <section 
         ref={screen3Ref}
-        className="screen-3 flex items-center justify-center bg-[#0f1d30] py-16 px-4"
+        className="screen-3 flex items-center justify-center bg-[#0f1d30] py-16 px-4 relative"
       >
         <div className="max-w-3xl mx-auto text-center space-y-8 screen-3-content">
           <h2 className="text-for-you text-4xl md:text-6xl font-display text-[#f5f0e6] leading-relaxed">
@@ -531,14 +631,17 @@ function IndexScroll() {
             But which "you"?
           </p>
         </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="text-[#d4a853] text-sm">↓ scroll ↓</div>
+        </div>
       </section>
-      )}
 
       {/* Screen 4: Meat or Math */}
-      {!hasSeenIntro && (
       <section 
         ref={screen4Ref}
-        className="screen-4 flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-16 px-8 md:px-16"
+        className="screen-4 flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-16 px-8 md:px-16 relative"
       >
         <div className="max-w-6xl mx-auto w-full screen-4-content">
           <h2 className="text-3xl md:text-5xl font-display text-[#f5f0e6] text-center mb-16">
@@ -573,14 +676,17 @@ function IndexScroll() {
             </div>
           </div>
         </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="text-[#d4a853] text-sm">↓ scroll ↓</div>
+        </div>
       </section>
-      )}
 
       {/* Screen 5: The Merge */}
-      {!hasSeenIntro && (
       <section 
         ref={screen5Ref}
-        className="screen-5 flex items-center justify-center bg-[#0d1a2d] py-16 px-4"
+        className="screen-5 flex items-center justify-center bg-[#0d1a2d] py-16 px-4 relative"
       >
         <div className="max-w-3xl mx-auto text-center space-y-8 merge-text screen-5-content">
           <p className="text-2xl md:text-3xl text-[#d4a853] font-display">Here's what we've learned:</p>
@@ -592,8 +698,12 @@ function IndexScroll() {
             <span className="text-[#d4a853]">in between.</span>
           </p>
         </div>
+        
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="text-[#d4a853] text-sm">↓ scroll ↓</div>
+        </div>
       </section>
-      )}
 
       {/* Screen 6: Pathways - Always visible */}
       <section 

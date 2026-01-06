@@ -2,10 +2,25 @@ import { Layout } from "@/components/layout";
 import { Link } from "react-router-dom";
 import { MessageCircle, Lightbulb, Music, Users, Heart, Brain, Code, FileText } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { OpeningAnimation } from "@/components/OpeningAnimation";
+import { useState, useRef, useEffect } from "react";
 
 function Index() {
+  const [showAnimation, setShowAnimation] = useState(true);
+  const howMadeRef = useRef<HTMLElement>(null);
+
+  const handleAnimationComplete = () => {
+    setShowAnimation(false);
+    // Scroll to "How This Site Was Made" section after animation
+    setTimeout(() => {
+      howMadeRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
+
   return (
     <Layout>
+      {showAnimation && <OpeningAnimation onComplete={handleAnimationComplete} />}
+      
       {/* Hero Section */}
       <section className="py-8">
         <div className="container">
@@ -464,7 +479,7 @@ function Index() {
       </section>
 
       {/* How This Site Was Made */}
-      <section className="bg-primary/5 py-16">
+      <section ref={howMadeRef} className="bg-primary/5 py-16">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-foreground mb-6">How This Site Was Made</h2>
