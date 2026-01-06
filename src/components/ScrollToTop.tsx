@@ -5,8 +5,18 @@ export function ScrollToTop() {
   const { pathname } = useLocation();
 
   useLayoutEffect(() => {
-    // Use scrollTo immediately before browser paint to prevent visible scrolling
-    window.scrollTo(0, 0);
+    // Disable browser scroll restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    
+    // Scroll to top immediately and forcefully
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
+    // Double-check with requestAnimationFrame to ensure it happens
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    });
   }, [pathname]);
 
   return null;
