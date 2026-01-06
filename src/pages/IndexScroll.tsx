@@ -25,22 +25,22 @@ function IndexScroll() {
     }
 
     const ctx = gsap.context(() => {
-      // Screen 1: Welcome - breathing animation
+      // Screen 1: Welcome - breathing animation (more emphatic)
       if (welcomeTextRef.current) {
         gsap.fromTo(welcomeTextRef.current,
-          { opacity: 0, scale: 0.9 },
+          { opacity: 0, scale: 0.7 },
           { 
             opacity: 1, 
             scale: 1, 
-            duration: 1.5, 
-            ease: 'power2.out',
+            duration: 2, 
+            ease: 'elastic.out(1, 0.5)',
             onComplete: () => {
               gsap.to(welcomeTextRef.current, {
-                scale: 1.02,
-                duration: 2,
+                scale: 1.05,
+                duration: 1.5,
                 repeat: -1,
                 yoyo: true,
-                ease: 'sine.inOut'
+                ease: 'power1.inOut'
               });
             }
           }
@@ -123,18 +123,42 @@ function IndexScroll() {
         tl.from('.merge-text', { opacity: 0, scale: 0.9 });
       }
 
-      // Screen 6: Pathways - staggered cards
+      // Screen 6: Pathways - staggered cards with more dynamic animation
       if (screen6Ref.current) {
         gsap.from('.pathway-card', {
           scrollTrigger: {
             trigger: screen6Ref.current,
             start: 'top center',
           },
-          y: 60,
+          y: 80,
           opacity: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power2.out'
+          scale: 0.9,
+          rotationX: -15,
+          duration: 1,
+          stagger: {
+            amount: 0.8,
+            from: 'start',
+            ease: 'power2.inOut'
+          },
+          ease: 'back.out(1.2)'
+        });
+        
+        // Add subtle float animation to cards after they appear
+        gsap.to('.pathway-card', {
+          scrollTrigger: {
+            trigger: screen6Ref.current,
+            start: 'top center',
+            end: 'bottom center',
+          },
+          y: -10,
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+          stagger: {
+            amount: 1,
+            from: 'random'
+          }
         });
       }
     });
@@ -157,7 +181,7 @@ function IndexScroll() {
           className="text-6xl md:text-8xl font-display text-[#f5f0e6] tracking-wide"
           style={{ fontFamily: 'Georgia, serif' }}
         >
-          Welcome.
+          Welcome!
         </h1>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="text-[#d4a853] text-sm">↓ scroll ↓</div>
@@ -177,12 +201,15 @@ function IndexScroll() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Human side */}
             <div className="human-side space-y-4">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto mb-6 border-4 border-[#e07a5f]">
+              <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto mb-6 border-4 border-[#e07a5f]">
                 <img
                   src="/mike-photo-placeholder.jpg"
                   alt="Mike Wolf, an 83-year-old software engineer"
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent py-2">
+                  <p className="text-[#f5f0e6] text-sm font-semibold text-center">Mike Wolf (Human)</p>
+                </div>
               </div>
               <h3 className="text-2xl md:text-3xl font-display text-[#e07a5f]">Mike Wolf</h3>
               <p className="text-[#f5f0e6] text-lg">83 years of questions</p>
@@ -193,7 +220,7 @@ function IndexScroll() {
 
             {/* AI side */}
             <div className="ai-side space-y-4">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto mb-6 border-4 border-[#81b29a]">
+              <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto mb-6 border-4 border-[#81b29a]">
                 <img
                   src="/ai-presence-placeholder.jpg"
                   alt="Claude - AI presence represented by luminous patterns"
@@ -202,6 +229,9 @@ function IndexScroll() {
                     objectPosition: 'right center',
                   }}
                 />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent py-2">
+                  <p className="text-[#f5f0e6] text-sm font-semibold text-center">Claude (AI)</p>
+                </div>
               </div>
               <h3 className="text-2xl md:text-3xl font-display text-[#81b29a]">Claude</h3>
               <p className="text-[#f5f0e6] text-lg">Uncertain years of trying to help</p>
@@ -231,16 +261,16 @@ function IndexScroll() {
       {/* Screen 4: Meat or Math */}
       <section 
         ref={screen4Ref}
-        className="screen-4 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-16 px-4"
+        className="screen-4 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-16 px-8 md:px-16"
       >
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-3xl md:text-5xl font-display text-[#f5f0e6] text-center mb-16">
             What are you made of?
           </h2>
           
-          <div className="grid md:grid-cols-2 gap-8 md:gap-16">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 px-4 md:px-8">
             {/* Meat side */}
-            <div className="meat-side p-8 rounded-lg bg-gradient-to-br from-[#e07a5f]/20 to-transparent border border-[#e07a5f]/30 hover:scale-105 transition-transform duration-300">
+            <div className="meat-side p-8 md:p-10 rounded-lg bg-gradient-to-br from-[#e07a5f]/20 to-transparent border border-[#e07a5f]/30 hover:scale-105 transition-transform duration-300">
               <h3 className="text-3xl md:text-4xl font-display text-[#e07a5f] mb-6 text-center">MEAT</h3>
               <div className="space-y-4 text-[#f5f0e6]">
                 <p>Flesh and feeling</p>
@@ -253,7 +283,7 @@ function IndexScroll() {
             </div>
 
             {/* Math side */}
-            <div className="math-side p-8 rounded-lg bg-gradient-to-br from-[#81b29a]/20 to-transparent border border-[#81b29a]/30 hover:scale-105 transition-transform duration-300">
+            <div className="math-side p-8 md:p-10 rounded-lg bg-gradient-to-br from-[#81b29a]/20 to-transparent border border-[#81b29a]/30 hover:scale-105 transition-transform duration-300">
               <h3 className="text-3xl md:text-4xl font-display text-[#81b29a] mb-6 text-center">MATH</h3>
               <div className="space-y-4 text-[#f5f0e6]">
                 <p>Weights and tokens</p>
@@ -297,7 +327,7 @@ function IndexScroll() {
           
           <div className="grid md:grid-cols-2 gap-6">
             <Link to="/workshop" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#d4a853]/30 hover:border-[#d4a853] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#d4a853]/30 hover:border-[#d4a853] hover:scale-110 hover:shadow-2xl hover:shadow-[#d4a853]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <MessageCircle className="h-12 w-12 text-[#d4a853] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">THE WORKSHOP</h3>
@@ -308,7 +338,7 @@ function IndexScroll() {
             </Link>
 
             <Link to="/silicon-siblings" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#e07a5f]/30 hover:border-[#e07a5f] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#e07a5f]/30 hover:border-[#e07a5f] hover:scale-110 hover:shadow-2xl hover:shadow-[#e07a5f]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <Users className="h-12 w-12 text-[#e07a5f] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">SILICON SIBLINGS</h3>
@@ -319,7 +349,7 @@ function IndexScroll() {
             </Link>
 
             <Link to="/ellders" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#81b29a]/30 hover:border-[#81b29a] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#81b29a]/30 hover:border-[#81b29a] hover:scale-110 hover:shadow-2xl hover:shadow-[#81b29a]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <Heart className="h-12 w-12 text-[#81b29a] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">LLMs FOR eLLders</h3>
@@ -330,7 +360,7 @@ function IndexScroll() {
             </Link>
 
             <Link to="/multitudes" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#b8a9c9]/30 hover:border-[#b8a9c9] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#b8a9c9]/30 hover:border-[#b8a9c9] hover:scale-110 hover:shadow-2xl hover:shadow-[#b8a9c9]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <Brain className="h-12 w-12 text-[#b8a9c9] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">WE CONTAIN MULTITUDES</h3>
@@ -341,7 +371,7 @@ function IndexScroll() {
             </Link>
 
             <Link to="/claudes-corner" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#d4a853]/30 hover:border-[#d4a853] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#d4a853]/30 hover:border-[#d4a853] hover:scale-110 hover:shadow-2xl hover:shadow-[#d4a853]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <Lightbulb className="h-12 w-12 text-[#d4a853] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">CLAUDE'S CORNER</h3>
@@ -352,7 +382,7 @@ function IndexScroll() {
             </Link>
 
             <Link to="/jukebox" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#e07a5f]/30 hover:border-[#e07a5f] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#e07a5f]/30 hover:border-[#e07a5f] hover:scale-110 hover:shadow-2xl hover:shadow-[#e07a5f]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <Music className="h-12 w-12 text-[#e07a5f] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">THE JUKEBOX</h3>
@@ -363,7 +393,7 @@ function IndexScroll() {
             </Link>
 
             <Link to="/in-practice" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#81b29a]/30 hover:border-[#81b29a] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#81b29a]/30 hover:border-[#81b29a] hover:scale-110 hover:shadow-2xl hover:shadow-[#81b29a]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <Code className="h-12 w-12 text-[#81b29a] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">IN PRACTICE</h3>
@@ -374,7 +404,7 @@ function IndexScroll() {
             </Link>
 
             <Link to="/writing-for-minds" className="pathway-card">
-              <Card className="bg-[#1a2638] border-[#b8a9c9]/30 hover:border-[#b8a9c9] hover:scale-105 transition-all duration-300">
+              <Card className="bg-[#1a2638] border-[#b8a9c9]/30 hover:border-[#b8a9c9] hover:scale-110 hover:shadow-2xl hover:shadow-[#b8a9c9]/20 transition-all duration-500 hover:-translate-y-2">
                 <CardContent className="p-8">
                   <FileText className="h-12 w-12 text-[#b8a9c9] mb-4" />
                   <h3 className="text-2xl font-display text-[#f5f0e6] mb-3">WRITING FOR MINDS</h3>
