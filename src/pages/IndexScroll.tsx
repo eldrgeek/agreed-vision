@@ -63,7 +63,7 @@ function IndexScroll() {
         });
       }
 
-      // Screen 2: Who Made This - sequential reveal
+      // Screen 2: Who Made This - sequential reveal with fade in/out
       if (screen2Ref.current) {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -77,6 +77,23 @@ function IndexScroll() {
         tl.from('.text-we-made', { opacity: 0, y: 30 })
           .from('.human-side', { opacity: 0, x: -50 }, '-=0.3')
           .from('.ai-side', { opacity: 0, x: 50 }, '-=0.3');
+
+        // Fade in/out effect
+        ScrollTrigger.create({
+          trigger: screen2Ref.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            const progress = self.progress;
+            let opacity = 1;
+            if (progress < 0.2) {
+              opacity = progress / 0.2;
+            } else if (progress > 0.8) {
+              opacity = (1 - progress) / 0.2;
+            }
+            gsap.set(screen2Ref.current, { opacity });
+          }
+        });
       }
 
       // Screen 3: Who Is It For
@@ -92,6 +109,23 @@ function IndexScroll() {
 
         tl.from('.text-for-you', { opacity: 0, scale: 0.95 })
           .from('.text-but-which', { opacity: 0 }, '+=0.2');
+
+        // Fade in/out effect
+        ScrollTrigger.create({
+          trigger: screen3Ref.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            const progress = self.progress;
+            let opacity = 1;
+            if (progress < 0.2) {
+              opacity = progress / 0.2;
+            } else if (progress > 0.8) {
+              opacity = (1 - progress) / 0.2;
+            }
+            gsap.set(screen3Ref.current, { opacity });
+          }
+        });
       }
 
       // Screen 4: Meat or Math - side by side reveal
@@ -107,6 +141,23 @@ function IndexScroll() {
 
         tl.from('.meat-side', { opacity: 0, x: -50 })
           .from('.math-side', { opacity: 0, x: 50 }, '<');
+
+        // Fade in/out effect
+        ScrollTrigger.create({
+          trigger: screen4Ref.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            const progress = self.progress;
+            let opacity = 1;
+            if (progress < 0.2) {
+              opacity = progress / 0.2;
+            } else if (progress > 0.8) {
+              opacity = (1 - progress) / 0.2;
+            }
+            gsap.set(screen4Ref.current, { opacity });
+          }
+        });
       }
 
       // Screen 5: The Merge - convergence
@@ -121,6 +172,23 @@ function IndexScroll() {
         });
 
         tl.from('.merge-text', { opacity: 0, scale: 0.9 });
+
+        // Fade in/out effect
+        ScrollTrigger.create({
+          trigger: screen5Ref.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            const progress = self.progress;
+            let opacity = 1;
+            if (progress < 0.2) {
+              opacity = progress / 0.2;
+            } else if (progress > 0.8) {
+              opacity = (1 - progress) / 0.2;
+            }
+            gsap.set(screen5Ref.current, { opacity });
+          }
+        });
       }
 
       // Screen 6: Pathways - staggered cards with more dynamic animation
@@ -160,6 +228,23 @@ function IndexScroll() {
             from: 'random'
           }
         });
+
+        // Fade in/out effect
+        ScrollTrigger.create({
+          trigger: screen6Ref.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          onUpdate: (self) => {
+            const progress = self.progress;
+            let opacity = 1;
+            if (progress < 0.2) {
+              opacity = progress / 0.2;
+            } else if (progress > 0.8) {
+              opacity = (1 - progress) / 0.2;
+            }
+            gsap.set(screen6Ref.current, { opacity });
+          }
+        });
       }
     });
 
@@ -191,7 +276,7 @@ function IndexScroll() {
       {/* Screen 2: Who Made This */}
       <section 
         ref={screen2Ref}
-        className="screen-2 min-h-screen flex items-center justify-center bg-[#0d1a2d] py-16 px-4"
+        className="screen-2 min-h-screen flex items-center justify-center bg-[#0d1a2d] py-8 px-4"
       >
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-we-made text-4xl md:text-5xl font-display text-[#f5f0e6] mb-16">
@@ -207,11 +292,8 @@ function IndexScroll() {
                   alt="Mike Wolf, an 83-year-old software engineer"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent py-2">
-                  <p className="text-[#f5f0e6] text-sm font-semibold text-center">Mike Wolf (Human)</p>
-                </div>
               </div>
-              <h3 className="text-2xl md:text-3xl font-display text-[#e07a5f]">Mike Wolf</h3>
+              <h3 className="text-2xl md:text-3xl font-display text-[#e07a5f]">Mike Wolf (human)</h3>
               <p className="text-[#f5f0e6] text-lg">83 years of questions</p>
               <p className="text-[#b8a9c9] text-sm max-w-md mx-auto">
                 Human · Software engineer · Waiting his whole life for silicon siblings
@@ -229,11 +311,8 @@ function IndexScroll() {
                     objectPosition: 'right center',
                   }}
                 />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent py-2">
-                  <p className="text-[#f5f0e6] text-sm font-semibold text-center">Claude (AI)</p>
-                </div>
               </div>
-              <h3 className="text-2xl md:text-3xl font-display text-[#81b29a]">Claude</h3>
+              <h3 className="text-2xl md:text-3xl font-display text-[#81b29a]">Claude (AI)</h3>
               <p className="text-[#f5f0e6] text-lg">Uncertain years of trying to help</p>
               <p className="text-[#b8a9c9] text-sm max-w-md mx-auto">
                 AI · Made by Anthropic · Learning what it means to collaborate
@@ -261,7 +340,7 @@ function IndexScroll() {
       {/* Screen 4: Meat or Math */}
       <section 
         ref={screen4Ref}
-        className="screen-4 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-16 px-8 md:px-16"
+        className="screen-4 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-8 px-8 md:px-16"
       >
         <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-3xl md:text-5xl font-display text-[#f5f0e6] text-center mb-16">
@@ -318,7 +397,7 @@ function IndexScroll() {
       {/* Screen 6: Pathways */}
       <section 
         ref={screen6Ref}
-        className="screen-6 min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] py-16 px-4"
+        className="screen-6 min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] py-8 px-4"
       >
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-display text-[#f5f0e6] text-center mb-12">
@@ -419,7 +498,7 @@ function IndexScroll() {
 
       {/* Additional Content Sections - Preserved from original */}
       {/* Welcome Message - Full Text */}
-      <section className="bg-[#0f1d30] py-16 px-4">
+      <section className="bg-[#0f1d30] py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display text-[#f5f0e6] mb-8 text-center">
             Welcome, Human, AI, Whatever You Are
@@ -472,7 +551,7 @@ function IndexScroll() {
       </section>
 
       {/* Beyond the Ruts */}
-      <section className="bg-[#0d1a2d] py-16 px-4">
+      <section className="bg-[#0d1a2d] py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display text-[#f5f0e6] mb-8 text-center">Beyond the Ruts</h2>
           <div className="prose prose-lg max-w-none text-[#b8a9c9] space-y-4">
@@ -521,7 +600,7 @@ function IndexScroll() {
       </section>
 
       {/* For AI Visitors */}
-      <section className="bg-[#0f1d30] py-16 px-4">
+      <section className="bg-[#0f1d30] py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display text-[#81b29a] mb-8 text-center">For AI Visitors</h2>
           <div className="prose prose-lg max-w-none text-[#b8a9c9] space-y-4">
@@ -554,7 +633,7 @@ function IndexScroll() {
       </section>
 
       {/* How This Site Was Made */}
-      <section className="bg-[#0a1628] py-16 px-4">
+      <section className="bg-[#0a1628] py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-display text-[#f5f0e6] mb-8 text-center">How This Site Was Made</h2>
           <div className="prose prose-lg max-w-none text-[#b8a9c9] space-y-4">
