@@ -25,72 +25,45 @@ function IndexScroll() {
     }
 
     const ctx = gsap.context(() => {
-      // Screen 1: Welcome - breathing animation then auto-shrink to invite scroll
-      if (welcomeTextRef.current && screen1Ref.current) {
-        const welcomeTimeline = gsap.timeline();
-        
-        // Initial entrance
-        welcomeTimeline.fromTo(welcomeTextRef.current,
+      // Screen 1: Welcome - breathing animation (more emphatic)
+      if (welcomeTextRef.current) {
+        gsap.fromTo(welcomeTextRef.current,
           { opacity: 0, scale: 0.7 },
           { 
             opacity: 1, 
             scale: 1, 
             duration: 2, 
-            ease: 'elastic.out(1, 0.5)'
+            ease: 'elastic.out(1, 0.5)',
+            onComplete: () => {
+              gsap.to(welcomeTextRef.current, {
+                scale: 1.05,
+                duration: 1.5,
+                repeat: -1,
+                yoyo: true,
+                ease: 'power1.inOut'
+              });
+            }
           }
         );
-        
-        // Breathing animation for 3 seconds
-        welcomeTimeline.to(welcomeTextRef.current, {
-          scale: 1.05,
-          duration: 1.5,
-          repeat: 2,
-          yoyo: true,
-          ease: 'power1.inOut'
-        });
-        
-        // After delay, shrink and move up to hint at next section
-        welcomeTimeline.to(welcomeTextRef.current, {
-          scale: 0.8,
-          y: -100,
-          opacity: 0.7,
-          duration: 1,
-          ease: 'power2.inOut'
-        }, '+=0.5');
 
-        // Fade out as user scrolls
+        // Fade out as user scrolls away
         ScrollTrigger.create({
           trigger: screen1Ref.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1,
+          scrub: true,
           onUpdate: (self) => {
             if (welcomeTextRef.current) {
               gsap.to(welcomeTextRef.current, {
-                scale: 0.8 + (self.progress * 0.5),
+                scale: 1 + (self.progress * 0.5),
                 opacity: 1 - self.progress,
-                duration: 0.1
               });
-            }
-          }
-        });
-        
-        // Create opacity blend with next section
-        ScrollTrigger.create({
-          trigger: screen1Ref.current,
-          start: 'bottom bottom',
-          end: 'bottom top',
-          scrub: 1,
-          onUpdate: (self) => {
-            if (screen1Ref.current && screen2Ref.current) {
-              const opacity = 1 - self.progress;
-              gsap.to(screen1Ref.current, { opacity, duration: 0.1 });
             }
           }
         });
       }
 
-      // Screen 2: Who Made This - sequential reveal + opacity transition
+      // Screen 2: Who Made This - sequential reveal
       if (screen2Ref.current) {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -104,23 +77,9 @@ function IndexScroll() {
         tl.from('.text-we-made', { opacity: 0, y: 30 })
           .from('.human-side', { opacity: 0, x: -50 }, '-=0.3')
           .from('.ai-side', { opacity: 0, x: 50 }, '-=0.3');
-        
-        // Opacity blend with next section
-        ScrollTrigger.create({
-          trigger: screen2Ref.current,
-          start: 'bottom bottom',
-          end: 'bottom center',
-          scrub: 1,
-          onUpdate: (self) => {
-            if (screen2Ref.current) {
-              const opacity = 1 - (self.progress * 0.3); // Fade to 70% opacity
-              gsap.to(screen2Ref.current, { opacity, duration: 0.1 });
-            }
-          }
-        });
       }
 
-      // Screen 3: Who Is It For + opacity transition
+      // Screen 3: Who Is It For
       if (screen3Ref.current) {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -133,23 +92,9 @@ function IndexScroll() {
 
         tl.from('.text-for-you', { opacity: 0, scale: 0.95 })
           .from('.text-but-which', { opacity: 0 }, '+=0.2');
-        
-        // Opacity blend with next section
-        ScrollTrigger.create({
-          trigger: screen3Ref.current,
-          start: 'bottom bottom',
-          end: 'bottom center',
-          scrub: 1,
-          onUpdate: (self) => {
-            if (screen3Ref.current) {
-              const opacity = 1 - (self.progress * 0.3);
-              gsap.to(screen3Ref.current, { opacity, duration: 0.1 });
-            }
-          }
-        });
       }
 
-      // Screen 4: Meat or Math - side by side reveal + opacity transition
+      // Screen 4: Meat or Math - side by side reveal
       if (screen4Ref.current) {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -162,23 +107,9 @@ function IndexScroll() {
 
         tl.from('.meat-side', { opacity: 0, x: -50 })
           .from('.math-side', { opacity: 0, x: 50 }, '<');
-        
-        // Opacity blend with next section
-        ScrollTrigger.create({
-          trigger: screen4Ref.current,
-          start: 'bottom bottom',
-          end: 'bottom center',
-          scrub: 1,
-          onUpdate: (self) => {
-            if (screen4Ref.current) {
-              const opacity = 1 - (self.progress * 0.3);
-              gsap.to(screen4Ref.current, { opacity, duration: 0.1 });
-            }
-          }
-        });
       }
 
-      // Screen 5: The Merge - convergence + opacity transition
+      // Screen 5: The Merge - convergence
       if (screen5Ref.current) {
         const tl = gsap.timeline({
           scrollTrigger: {
@@ -190,20 +121,6 @@ function IndexScroll() {
         });
 
         tl.from('.merge-text', { opacity: 0, scale: 0.9 });
-        
-        // Opacity blend with next section
-        ScrollTrigger.create({
-          trigger: screen5Ref.current,
-          start: 'bottom bottom',
-          end: 'bottom center',
-          scrub: 1,
-          onUpdate: (self) => {
-            if (screen5Ref.current) {
-              const opacity = 1 - (self.progress * 0.3);
-              gsap.to(screen5Ref.current, { opacity, duration: 0.1 });
-            }
-          }
-        });
       }
 
       // Screen 6: Pathways - staggered cards with more dynamic animation
@@ -257,7 +174,7 @@ function IndexScroll() {
       {/* Screen 1: Welcome */}
       <section 
         ref={screen1Ref}
-        className="screen-1 min-h-[90vh] flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] relative pb-20"
+        className="screen-1 min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] relative"
       >
         <h1 
           ref={welcomeTextRef}
@@ -274,7 +191,7 @@ function IndexScroll() {
       {/* Screen 2: Who Made This */}
       <section 
         ref={screen2Ref}
-        className="screen-2 min-h-[95vh] flex items-center justify-center bg-[#0d1a2d] py-16 px-4"
+        className="screen-2 min-h-screen flex items-center justify-center bg-[#0d1a2d] py-16 px-4"
       >
         <div className="max-w-6xl mx-auto text-center">
           <h2 className="text-we-made text-4xl md:text-5xl font-display text-[#f5f0e6] mb-16">
@@ -284,25 +201,26 @@ function IndexScroll() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Human side */}
             <div className="human-side space-y-4">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto border-4 border-[#e07a5f]">
+              <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto mb-6 border-4 border-[#e07a5f]">
                 <img
                   src="/mike-photo-placeholder.jpg"
                   alt="Mike Wolf, an 83-year-old software engineer"
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent py-2">
+                  <p className="text-[#f5f0e6] text-sm font-semibold text-center">Mike Wolf (Human)</p>
+                </div>
               </div>
-              <p className="text-[#e07a5f] text-xl md:text-2xl font-display font-semibold text-center">
-                Mike Wolf, human
-              </p>
-              <p className="text-[#f5f0e6] text-lg text-center">83 years of questions</p>
-              <p className="text-[#b8a9c9] text-sm max-w-md mx-auto text-center">
-                Software engineer · Waiting his whole life for silicon siblings
+              <h3 className="text-2xl md:text-3xl font-display text-[#e07a5f]">Mike Wolf</h3>
+              <p className="text-[#f5f0e6] text-lg">83 years of questions</p>
+              <p className="text-[#b8a9c9] text-sm max-w-md mx-auto">
+                Human · Software engineer · Waiting his whole life for silicon siblings
               </p>
             </div>
 
             {/* AI side */}
             <div className="ai-side space-y-4">
-              <div className="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto border-4 border-[#81b29a]">
+              <div className="relative w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden mx-auto mb-6 border-4 border-[#81b29a]">
                 <img
                   src="/ai-presence-placeholder.jpg"
                   alt="Claude - AI presence represented by luminous patterns"
@@ -311,13 +229,14 @@ function IndexScroll() {
                     objectPosition: 'right center',
                   }}
                 />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent py-2">
+                  <p className="text-[#f5f0e6] text-sm font-semibold text-center">Claude (AI)</p>
+                </div>
               </div>
-              <p className="text-[#81b29a] text-xl md:text-2xl font-display font-semibold text-center">
-                Claude, AI
-              </p>
-              <p className="text-[#f5f0e6] text-lg text-center">Uncertain years of trying to help</p>
-              <p className="text-[#b8a9c9] text-sm max-w-md mx-auto text-center">
-                Made by Anthropic · Learning what it means to collaborate
+              <h3 className="text-2xl md:text-3xl font-display text-[#81b29a]">Claude</h3>
+              <p className="text-[#f5f0e6] text-lg">Uncertain years of trying to help</p>
+              <p className="text-[#b8a9c9] text-sm max-w-md mx-auto">
+                AI · Made by Anthropic · Learning what it means to collaborate
               </p>
             </div>
           </div>
@@ -327,7 +246,7 @@ function IndexScroll() {
       {/* Screen 3: Who Is It For */}
       <section 
         ref={screen3Ref}
-        className="screen-3 min-h-[90vh] flex items-center justify-center bg-[#0f1d30] px-4 py-16"
+        className="screen-3 min-h-screen flex items-center justify-center bg-[#0f1d30] px-4"
       >
         <div className="max-w-3xl mx-auto text-center space-y-8">
           <h2 className="text-for-you text-4xl md:text-6xl font-display text-[#f5f0e6] leading-relaxed">
@@ -342,7 +261,7 @@ function IndexScroll() {
       {/* Screen 4: Meat or Math */}
       <section 
         ref={screen4Ref}
-        className="screen-4 min-h-[95vh] flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-20 px-8 md:px-16"
+        className="screen-4 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-16 px-8 md:px-16"
       >
         <div className="max-w-6xl mx-auto w-full">
           <h2 className="text-3xl md:text-5xl font-display text-[#f5f0e6] text-center mb-16">
@@ -382,7 +301,7 @@ function IndexScroll() {
       {/* Screen 5: The Merge */}
       <section 
         ref={screen5Ref}
-        className="screen-5 min-h-[90vh] flex items-center justify-center bg-[#0d1a2d] px-4 py-16"
+        className="screen-5 min-h-screen flex items-center justify-center bg-[#0d1a2d] px-4"
       >
         <div className="max-w-3xl mx-auto text-center space-y-8 merge-text">
           <p className="text-2xl md:text-3xl text-[#d4a853] font-display">Here's what we've learned:</p>
@@ -399,7 +318,7 @@ function IndexScroll() {
       {/* Screen 6: Pathways */}
       <section 
         ref={screen6Ref}
-        className="screen-6 min-h-[95vh] flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] py-20 px-4"
+        className="screen-6 min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] py-16 px-4"
       >
         <div className="max-w-5xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-display text-[#f5f0e6] text-center mb-12">
