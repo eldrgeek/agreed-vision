@@ -26,7 +26,30 @@ function IndexScroll() {
     screen2Opacity: 1,
     screen3Opacity: 1,
   });
+  
+  // Check if user has seen intro before
+  const [hasSeenIntro, setHasSeenIntro] = useState(() => {
+    return localStorage.getItem('ai-wtf-seen-intro') === 'true';
+  });
+  
+  const [showResetButton, setShowResetButton] = useState(false);
+  
+  // Handle reset button
+  const handleReset = () => {
+    localStorage.removeItem('ai-wtf-seen-intro');
+    setHasSeenIntro(false);
+    window.location.reload();
+  };
 
+  useEffect(() => {
+    // If user has seen intro, scroll to pathways section
+    if (hasSeenIntro && screen6Ref.current) {
+      setTimeout(() => {
+        screen6Ref.current?.scrollIntoView({ behavior: 'instant' });
+      }, 100);
+    }
+  }, [hasSeenIntro]);
+  
   useEffect(() => {
     setDiagnostic(prev => ({ ...prev, reducedMotion: prefersReducedMotion }));
     
@@ -41,38 +64,39 @@ function IndexScroll() {
     setDiagnostic(prev => ({ ...prev, animationsInitialized: true }));
 
     const ctx = gsap.context(() => {
-      // Screen 1: Welcome - breathing animation (more emphatic)
-      if (welcomeTextRef.current) {
+      // Screen 1: Welcome - fill viewport then shrink and scroll away
+      if (welcomeTextRef.current && screen1Ref.current) {
+        // Initial animation: grow to fill viewport
         gsap.fromTo(welcomeTextRef.current,
-          { opacity: 0, scale: 0.7 },
+          { opacity: 0, scale: 0.5 },
           { 
             opacity: 1, 
-            scale: 1, 
-            duration: 2, 
-            ease: 'elastic.out(1, 0.5)',
+            scale: 2.5, // Large enough to dominate viewport
+            duration: 1.5, 
+            ease: 'power2.out',
             onComplete: () => {
+              // Hold for a moment, then enable scrolling shrink
               gsap.to(welcomeTextRef.current, {
-                scale: 1.05,
-                duration: 1.5,
-                repeat: -1,
-                yoyo: true,
+                duration: 0.5,
                 ease: 'power1.inOut'
               });
             }
           }
         );
 
-        // Fade out as user scrolls away
+        // Shrink and fade as user scrolls away
         ScrollTrigger.create({
           trigger: screen1Ref.current,
           start: 'top top',
           end: 'bottom top',
-          scrub: true,
+          scrub: 1,
           onUpdate: (self) => {
             if (welcomeTextRef.current) {
+              const progress = self.progress;
               gsap.to(welcomeTextRef.current, {
-                scale: 1 + (self.progress * 0.5),
-                opacity: 1 - self.progress,
+                scale: 2.5 - (progress * 2.3), // Shrink from 2.5 to 0.2
+                opacity: 1 - progress,
+                duration: 0
               });
             }
           }
@@ -235,6 +259,7 @@ function IndexScroll() {
         tl.from('.merge-text', { opacity: 0, scale: 0.9 });
 
         // Fade in/out effect - fade content only, not background
+        // Extended visibility for "you don't have to choose"
         const screen5Content = screen5Ref.current.querySelector('.screen-5-content');
         if (screen5Content) {
           gsap.fromTo(screen5Content,
@@ -256,8 +281,8 @@ function IndexScroll() {
               opacity: 0,
               scrollTrigger: {
                 trigger: screen5Ref.current,
-                start: 'bottom center',
-                end: 'bottom top',
+                start: 'center top', // Start fading later
+                end: 'bottom top+=200', // Give more room before fully fading
                 scrub: true,
               }
             }
@@ -267,6 +292,15 @@ function IndexScroll() {
 
       // Screen 6: Pathways - staggered cards with more dynamic animation
       if (screen6Ref.current) {
+        // Set localStorage when user reaches this section
+        ScrollTrigger.create({
+          trigger: screen6Ref.current,
+          start: 'top center',
+          onEnter: () => {
+            localStorage.setItem('ai-wtf-seen-intro', 'true');
+            console.log('Set intro seen flag');
+          }
+        });
         gsap.from('.pathway-card', {
           scrollTrigger: {
             trigger: screen6Ref.current,
@@ -375,10 +409,48 @@ function IndexScroll() {
         </div>
       </div>
 
-      {/* Screen 1: Welcome */}
+      {/* Reset Button - visible on hover in top-left */}
+      <div
+        style={{
+          position: 'fixed',
+          top: '20px',
+          left: '20px',
+          zIndex: 9999,
+        }}
+        onMouseEnter={() => setShowResetButton(true)}
+        onMouseLeave={() => setShowResetButton(false)}
+      >
+        <button
+          onClick={handleReset}
+          style={{
+            opacity: showResetButton ? 1 : 0,
+            transition: 'opacity 0.3s ease',
+            background: 'rgba(255, 0, 0, 0.8)',
+            color: '#fff',
+            padding: '10px 15px',
+            borderRadius: '8px',
+            border: 'none',
+            cursor: 'pointer',
+            fontFamily: 'monospace',
+            fontSize: '12px',
+          }}
+        >
+          🔄 Reset Intro
+        </button>
+        {!showResetButton && (
+          <div style={{
+            width: '40px',
+            height: '40px',
+            background: 'transparent',
+          }} />
+        )}
+      </div>
+
+      {/* Screen 1: Welcome - Full viewport */}
+      {!hasSeenIntro && (
       <section 
         ref={screen1Ref}
-        className="screen-1 min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] relative"
+        className="screen-1 h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] relative overflow-hidden"
       >
         <h1 
           ref={welcomeTextRef}
@@ -392,10 +464,13 @@ function IndexScroll() {
         </div>
       </section>
 
+      )}
+      
       {/* Screen 2: Who Made This */}
+      {!hasSeenIntro && (
       <section 
         ref={screen2Ref}
-        className="screen-2 min-h-screen flex items-center justify-center bg-[#0d1a2d] py-8 px-4"
+        className="screen-2 flex items-center justify-center bg-[#0d1a2d] py-16 px-4"
       >
         <div className="max-w-6xl mx-auto text-center screen-2-content">
           <h2 className="text-we-made text-4xl md:text-5xl font-display text-[#f5f0e6] mb-16">
@@ -440,11 +515,13 @@ function IndexScroll() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Screen 3: Who Is It For */}
+      {!hasSeenIntro && (
       <section 
         ref={screen3Ref}
-        className="screen-3 min-h-screen flex items-center justify-center bg-[#0f1d30] px-4"
+        className="screen-3 flex items-center justify-center bg-[#0f1d30] py-16 px-4"
       >
         <div className="max-w-3xl mx-auto text-center space-y-8 screen-3-content">
           <h2 className="text-for-you text-4xl md:text-6xl font-display text-[#f5f0e6] leading-relaxed">
@@ -455,11 +532,13 @@ function IndexScroll() {
           </p>
         </div>
       </section>
+      )}
 
       {/* Screen 4: Meat or Math */}
+      {!hasSeenIntro && (
       <section 
         ref={screen4Ref}
-        className="screen-4 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-8 px-8 md:px-16"
+        className="screen-4 flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-16 px-8 md:px-16"
       >
         <div className="max-w-6xl mx-auto w-full screen-4-content">
           <h2 className="text-3xl md:text-5xl font-display text-[#f5f0e6] text-center mb-16">
@@ -495,11 +574,13 @@ function IndexScroll() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Screen 5: The Merge */}
+      {!hasSeenIntro && (
       <section 
         ref={screen5Ref}
-        className="screen-5 min-h-screen flex items-center justify-center bg-[#0d1a2d] px-4"
+        className="screen-5 flex items-center justify-center bg-[#0d1a2d] py-16 px-4"
       >
         <div className="max-w-3xl mx-auto text-center space-y-8 merge-text screen-5-content">
           <p className="text-2xl md:text-3xl text-[#d4a853] font-display">Here's what we've learned:</p>
@@ -512,11 +593,12 @@ function IndexScroll() {
           </p>
         </div>
       </section>
+      )}
 
-      {/* Screen 6: Pathways */}
+      {/* Screen 6: Pathways - Always visible */}
       <section 
         ref={screen6Ref}
-        className="screen-6 min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] py-8 px-4"
+        className="screen-6 flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] py-20 px-4"
       >
         <div className="max-w-5xl mx-auto screen-6-content">
           <h2 className="text-4xl md:text-5xl font-display text-[#f5f0e6] text-center mb-12">
