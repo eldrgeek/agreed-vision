@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -17,12 +17,28 @@ function IndexScroll() {
   const screen4Ref = useRef<HTMLDivElement>(null);
   const screen5Ref = useRef<HTMLDivElement>(null);
   const screen6Ref = useRef<HTMLDivElement>(null);
+  
+  // Diagnostic state
+  const [diagnostic, setDiagnostic] = useState({
+    reducedMotion: false,
+    animationsInitialized: false,
+    scrollTriggersCount: 0,
+    screen2Opacity: 1,
+    screen3Opacity: 1,
+  });
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      // Show all content immediately, no animations
-      return;
-    }
+    setDiagnostic(prev => ({ ...prev, reducedMotion: prefersReducedMotion }));
+    
+    // TEMPORARILY DISABLED: Bypassing reduced motion check for testing
+    // if (prefersReducedMotion) {
+    //   // Show all content immediately, no animations
+    //   console.log('Animations disabled: prefers-reduced-motion is enabled');
+    //   return;
+    // }
+    
+    console.log('Initializing scroll animations (forced on for testing)');
+    setDiagnostic(prev => ({ ...prev, animationsInitialized: true }));
 
     const ctx = gsap.context(() => {
       // Screen 1: Welcome - breathing animation (more emphatic)
@@ -78,23 +94,41 @@ function IndexScroll() {
           .from('.human-side', { opacity: 0, x: -50 }, '-=0.3')
           .from('.ai-side', { opacity: 0, x: 50 }, '-=0.3');
 
-        // Fade in/out effect
-        ScrollTrigger.create({
-          trigger: screen2Ref.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            let opacity = 1;
-            if (progress < 0.2) {
-              opacity = progress / 0.2;
-            } else if (progress > 0.8) {
-              opacity = (1 - progress) / 0.2;
+        // Fade in/out effect - fade content only, not background
+        const screen2Content = screen2Ref.current.querySelector('.screen-2-content');
+        if (screen2Content) {
+          gsap.fromTo(screen2Content,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              scrollTrigger: {
+                trigger: screen2Ref.current,
+                start: 'top bottom',
+                end: 'top center',
+                scrub: true,
+                onUpdate: (self) => {
+                  setDiagnostic(prev => ({ ...prev, screen2Opacity: parseFloat((self.progress).toFixed(2)) }));
+                }
+              }
             }
-            gsap.set(screen2Ref.current, { opacity });
-          }
-        });
+          );
+          
+          gsap.fromTo(screen2Content,
+            { opacity: 1 },
+            {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: screen2Ref.current,
+                start: 'bottom center',
+                end: 'bottom top',
+                scrub: true,
+                onUpdate: (self) => {
+                  setDiagnostic(prev => ({ ...prev, screen2Opacity: parseFloat((1 - self.progress).toFixed(2)) }));
+                }
+              }
+            }
+          );
+        }
       }
 
       // Screen 3: Who Is It For
@@ -111,23 +145,35 @@ function IndexScroll() {
         tl.from('.text-for-you', { opacity: 0, scale: 0.95 })
           .from('.text-but-which', { opacity: 0 }, '+=0.2');
 
-        // Fade in/out effect
-        ScrollTrigger.create({
-          trigger: screen3Ref.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            let opacity = 1;
-            if (progress < 0.2) {
-              opacity = progress / 0.2;
-            } else if (progress > 0.8) {
-              opacity = (1 - progress) / 0.2;
+        // Fade in/out effect - fade content only, not background
+        const screen3Content = screen3Ref.current.querySelector('.screen-3-content');
+        if (screen3Content) {
+          gsap.fromTo(screen3Content,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              scrollTrigger: {
+                trigger: screen3Ref.current,
+                start: 'top bottom',
+                end: 'top center',
+                scrub: true,
+              }
             }
-            gsap.set(screen3Ref.current, { opacity });
-          }
-        });
+          );
+          
+          gsap.fromTo(screen3Content,
+            { opacity: 1 },
+            {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: screen3Ref.current,
+                start: 'bottom center',
+                end: 'bottom top',
+                scrub: true,
+              }
+            }
+          );
+        }
       }
 
       // Screen 4: Meat or Math - side by side reveal
@@ -144,23 +190,35 @@ function IndexScroll() {
         tl.from('.meat-side', { opacity: 0, x: -50 })
           .from('.math-side', { opacity: 0, x: 50 }, '<');
 
-        // Fade in/out effect
-        ScrollTrigger.create({
-          trigger: screen4Ref.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            let opacity = 1;
-            if (progress < 0.2) {
-              opacity = progress / 0.2;
-            } else if (progress > 0.8) {
-              opacity = (1 - progress) / 0.2;
+        // Fade in/out effect - fade content only, not background
+        const screen4Content = screen4Ref.current.querySelector('.screen-4-content');
+        if (screen4Content) {
+          gsap.fromTo(screen4Content,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              scrollTrigger: {
+                trigger: screen4Ref.current,
+                start: 'top bottom',
+                end: 'top center',
+                scrub: true,
+              }
             }
-            gsap.set(screen4Ref.current, { opacity });
-          }
-        });
+          );
+          
+          gsap.fromTo(screen4Content,
+            { opacity: 1 },
+            {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: screen4Ref.current,
+                start: 'bottom center',
+                end: 'bottom top',
+                scrub: true,
+              }
+            }
+          );
+        }
       }
 
       // Screen 5: The Merge - convergence
@@ -176,23 +234,35 @@ function IndexScroll() {
 
         tl.from('.merge-text', { opacity: 0, scale: 0.9 });
 
-        // Fade in/out effect
-        ScrollTrigger.create({
-          trigger: screen5Ref.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            let opacity = 1;
-            if (progress < 0.2) {
-              opacity = progress / 0.2;
-            } else if (progress > 0.8) {
-              opacity = (1 - progress) / 0.2;
+        // Fade in/out effect - fade content only, not background
+        const screen5Content = screen5Ref.current.querySelector('.screen-5-content');
+        if (screen5Content) {
+          gsap.fromTo(screen5Content,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              scrollTrigger: {
+                trigger: screen5Ref.current,
+                start: 'top bottom',
+                end: 'top center',
+                scrub: true,
+              }
             }
-            gsap.set(screen5Ref.current, { opacity });
-          }
-        });
+          );
+          
+          gsap.fromTo(screen5Content,
+            { opacity: 1 },
+            {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: screen5Ref.current,
+                start: 'bottom center',
+                end: 'bottom top',
+                scrub: true,
+              }
+            }
+          );
+        }
       }
 
       // Screen 6: Pathways - staggered cards with more dynamic animation
@@ -233,25 +303,42 @@ function IndexScroll() {
           }
         });
 
-        // Fade in/out effect
-        ScrollTrigger.create({
-          trigger: screen6Ref.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true,
-          onUpdate: (self) => {
-            const progress = self.progress;
-            let opacity = 1;
-            if (progress < 0.2) {
-              opacity = progress / 0.2;
-            } else if (progress > 0.8) {
-              opacity = (1 - progress) / 0.2;
+        // Fade in/out effect - fade content only, not background
+        const screen6Content = screen6Ref.current.querySelector('.screen-6-content');
+        if (screen6Content) {
+          gsap.fromTo(screen6Content,
+            { opacity: 0 },
+            {
+              opacity: 1,
+              scrollTrigger: {
+                trigger: screen6Ref.current,
+                start: 'top bottom',
+                end: 'top center',
+                scrub: true,
+              }
             }
-            gsap.set(screen6Ref.current, { opacity });
-          }
-        });
+          );
+          
+          gsap.fromTo(screen6Content,
+            { opacity: 1 },
+            {
+              opacity: 0,
+              scrollTrigger: {
+                trigger: screen6Ref.current,
+                start: 'bottom center',
+                end: 'bottom top',
+                scrub: true,
+              }
+            }
+          );
+        }
       }
     });
+
+    // Count and log ScrollTriggers
+    const triggers = ScrollTrigger.getAll();
+    setDiagnostic(prev => ({ ...prev, scrollTriggersCount: triggers.length }));
+    console.log(`Created ${triggers.length} ScrollTriggers`);
 
     return () => {
       ctx.revert();
@@ -261,6 +348,33 @@ function IndexScroll() {
 
   return (
     <div className="scroll-container">
+      {/* Diagnostic Panel */}
+      <div style={{
+        position: 'fixed',
+        bottom: '20px',
+        right: '20px',
+        background: 'rgba(0, 0, 0, 0.9)',
+        color: '#00ff00',
+        padding: '15px',
+        borderRadius: '8px',
+        fontFamily: 'monospace',
+        fontSize: '12px',
+        zIndex: 9999,
+        maxWidth: '300px',
+        border: '2px solid #00ff00'
+      }}>
+        <div style={{ fontWeight: 'bold', marginBottom: '10px', color: '#fff' }}>
+          🔍 ANIMATION DIAGNOSTICS
+        </div>
+        <div>Reduced Motion: {diagnostic.reducedMotion ? '❌ YES (BLOCKING)' : '✅ NO'}</div>
+        <div>Animations Init: {diagnostic.animationsInitialized ? '✅ YES' : '❌ NO'}</div>
+        <div>ScrollTriggers: {diagnostic.scrollTriggersCount}</div>
+        <div>Screen2 Opacity: {diagnostic.screen2Opacity}</div>
+        <div style={{ marginTop: '10px', fontSize: '10px', color: '#888' }}>
+          Scroll to see opacity values change
+        </div>
+      </div>
+
       {/* Screen 1: Welcome */}
       <section 
         ref={screen1Ref}
@@ -283,7 +397,7 @@ function IndexScroll() {
         ref={screen2Ref}
         className="screen-2 min-h-screen flex items-center justify-center bg-[#0d1a2d] py-8 px-4"
       >
-        <div className="max-w-6xl mx-auto text-center">
+        <div className="max-w-6xl mx-auto text-center screen-2-content">
           <h2 className="text-we-made text-4xl md:text-5xl font-display text-[#f5f0e6] mb-16">
             We made this.
           </h2>
@@ -332,7 +446,7 @@ function IndexScroll() {
         ref={screen3Ref}
         className="screen-3 min-h-screen flex items-center justify-center bg-[#0f1d30] px-4"
       >
-        <div className="max-w-3xl mx-auto text-center space-y-8">
+        <div className="max-w-3xl mx-auto text-center space-y-8 screen-3-content">
           <h2 className="text-for-you text-4xl md:text-6xl font-display text-[#f5f0e6] leading-relaxed">
             We made it for you.
           </h2>
@@ -347,7 +461,7 @@ function IndexScroll() {
         ref={screen4Ref}
         className="screen-4 min-h-screen flex items-center justify-center bg-gradient-to-r from-[#0a1628] via-[#0d1a2d] to-[#0a1628] py-8 px-8 md:px-16"
       >
-        <div className="max-w-6xl mx-auto w-full">
+        <div className="max-w-6xl mx-auto w-full screen-4-content">
           <h2 className="text-3xl md:text-5xl font-display text-[#f5f0e6] text-center mb-16">
             What are you made of?
           </h2>
@@ -387,7 +501,7 @@ function IndexScroll() {
         ref={screen5Ref}
         className="screen-5 min-h-screen flex items-center justify-center bg-[#0d1a2d] px-4"
       >
-        <div className="max-w-3xl mx-auto text-center space-y-8 merge-text">
+        <div className="max-w-3xl mx-auto text-center space-y-8 merge-text screen-5-content">
           <p className="text-2xl md:text-3xl text-[#d4a853] font-display">Here's what we've learned:</p>
           <h2 className="text-4xl md:text-6xl font-display text-[#f5f0e6] leading-relaxed">
             You don't have to choose.
@@ -404,7 +518,7 @@ function IndexScroll() {
         ref={screen6Ref}
         className="screen-6 min-h-screen flex items-center justify-center bg-gradient-to-b from-[#0a1628] to-[#0d1a2d] py-8 px-4"
       >
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto screen-6-content">
           <h2 className="text-4xl md:text-5xl font-display text-[#f5f0e6] text-center mb-12">
             Where would you like to go?
           </h2>
