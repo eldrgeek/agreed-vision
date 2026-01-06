@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
-import Index from "./pages/Index";
+import IndexScroll from "./pages/IndexScroll";
 import Workshop from "./pages/Workshop";
 import ClaudesCorner from "./pages/ClaudesCorner";
 import Ellders from "./pages/Ellders";
@@ -35,7 +35,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<IndexScroll />} />
           <Route path="/workshop" element={<Workshop />} />
           <Route path="/claudes-corner" element={<ClaudesCorner />} />
           <Route path="/ellders" element={<Ellders />} />
