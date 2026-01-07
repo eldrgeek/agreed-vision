@@ -22,7 +22,7 @@ const articles = [
     id: "articulation-bottleneck",
     path: "/articulation-bottleneck",
     title: "The Articulation Bottleneck",
-    excerpt: "Why translating pre-linguistic thought into words is the fundamental constraint on human-AI collaboration—and what we're doing about it.",
+    excerpt: "The slowest part of human-AI collaboration: turning intuition into language. Why this constraint shapes everything, and how we're working around it.",
     icon: Lightbulb,
   },
 ];

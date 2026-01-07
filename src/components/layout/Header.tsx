@@ -14,6 +14,7 @@ const navigation = [
   { name: "Jukebox", href: "/jukebox" },
   { name: "In Practice", href: "/in-practice" },
   { name: "Writing for Minds", href: "/writing-for-minds" },
+  { name: "The Making", href: "/the-making" },
 ];
 
 export function Header() {

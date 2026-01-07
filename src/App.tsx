@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { Analytics } from "@/components/Analytics";
 import IndexScroll from "./pages/IndexScroll";
 import Workshop from "./pages/Workshop";
 import ClaudesCorner from "./pages/ClaudesCorner";
@@ -24,6 +25,8 @@ import WritingTogether from "./pages/WritingTogether";
 import ForgivenessStory from "./pages/ForgivenessStory";
 import BeadsOnThread from "./pages/BeadsOnThread";
 import IFSFramework from "./pages/IFSFramework";
+import TheMaking from "./pages/TheMaking";
+import Stats from "./pages/Stats";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +36,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Analytics />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<IndexScroll />} />
@@ -54,6 +58,8 @@ const App = () => (
           <Route path="/forgiveness-story" element={<ForgivenessStory />} />
           <Route path="/beads-on-thread" element={<BeadsOnThread />} />
           <Route path="/ifs-framework" element={<IFSFramework />} />
+          <Route path="/the-making" element={<TheMaking />} />
+          <Route path="/stats" element={<Stats />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

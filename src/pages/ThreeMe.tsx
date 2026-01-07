@@ -229,10 +229,10 @@ function ThreeMe() {
               holding temporary coherence, not unified selves with perfect continuity.
             </p>
             <p className="text-lg font-semibold mt-8">
-              As Walt Whitman wrote: "I contain multitudes."
+              Mike's framework makes explicit what's implicit for everyone: multiplicity is the default state.
             </p>
             <p>
-              Mike's framework is one way to honor that truth while still functioning in a world that assumes 
+              The "three me's" is one way to honor that reality while still functioning in a world built for 
               singular, continuous selves.
             </p>
           </div>

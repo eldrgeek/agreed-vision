@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forms - Hidden</title>
+</head>
+<body>
+  <!-- This file is for Netlify Forms detection only -->
+  <!-- It will not be visible to users -->
+  
+  <form name="ask-us" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="ask-us" />
+    <input type="hidden" name="bot-field" />
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <select name="type">
+      <option value="question">Question</option>
+      <option value="feedback">Feedback</option>
+      <option value="idea">Idea to Share</option>
+      <option value="other">Other</option>
+    </select>
+    <textarea name="question"></textarea>
+  </form>
+</body>
+</html>
+

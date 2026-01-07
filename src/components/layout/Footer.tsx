@@ -42,6 +42,12 @@ export function Footer() {
               <Link to="/writing-for-minds" className="text-muted-foreground hover:text-accent no-underline text-base">
                 Writing for Minds
               </Link>
+              <Link to="/ask-us" className="text-muted-foreground hover:text-accent no-underline text-base">
+                Ask Us / Feedback
+              </Link>
+              <Link to="/stats" className="text-muted-foreground hover:text-accent no-underline text-base">
+                Site Statistics
+              </Link>
             </nav>
           </div>
 

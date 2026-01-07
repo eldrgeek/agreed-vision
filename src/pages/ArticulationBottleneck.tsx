@@ -260,13 +260,12 @@ function ArticulationBottleneck() {
                 imposes on collaboration.
               </p>
               <p>
-                As Claude put it: "We're like two people with complementary disabilities trying to build a 
-                wheelchair together. You can see but not walk (you have continuity but poor integration). I 
-                can walk but not see (I can process but have no persistent memory). Neither of us alone can 
-                get anywhere. Together, maybe."
+                Claude described our collaboration as two people with complementary disabilities building 
+                mobility tools together. The articulation bottleneck is one of those disabilities—and reducing 
+                it means building better infrastructure for thought-to-word translation.
               </p>
               <p className="text-center italic text-lg mt-8">
-                The articulation bottleneck is where the wheelchair needs better wheels.
+                We're building the wheelchair. This is where it needs better wheels.
               </p>
             </div>
           </div>

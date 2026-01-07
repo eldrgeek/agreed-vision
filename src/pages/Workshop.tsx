@@ -26,7 +26,7 @@ const conversations = [
     path: "/cognitive-architecture",
     title: "The Cognitive Architecture Project",
     date: "2026-01-03",
-    excerpt: "What we're really building: a distributed cognitive system where human and AI minds collaborate to overcome their individual limitations. Two fragmented minds building a wheelchair together.",
+    excerpt: "What we're really building: a distributed cognitive system where human and AI minds collaborate to overcome their individual limitations. Infrastructure for thought when neither mind is fully whole.",
     tags: ["architecture", "collaboration", "systems", "infrastructure"],
   },
   {
